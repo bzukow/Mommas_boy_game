@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Machete
+  - Cigarette
+  - Throwing_machine
+  - Employee
+  - Monster
+  - Fairy
+  - Alco_fog
+  - Beret
+  - Grandma
+  - Place_to_touch_the_hat
+  - Player_collider
+  - Coin
+  - Lift_entry
+  - Players_parent
+  - Canvas
+  - ProductList
+  - Lives
+  - Onion_check
+  - StuffFromList
+  - Saver
+  - Button
+  - Counter
+  - Scoreboard
+  - MyBool
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostProcessing
+  - "pod\u0142oga"
+  - "\u015Bciany"
+  - kartka1
+  - kartka2
+  - kartka3
+  - kartka4
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
