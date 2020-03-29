@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.SceneManagement;
-
+using System;
 public class MainController : MonoBehaviour
 {
     public int counter;
@@ -132,7 +132,7 @@ public class MainController : MonoBehaviour
 
         foreach (Transform child in transform)
         {
-            Sprite randomImage = tmpListOfImages.ElementAt(Random.Range(0, tmpListOfImages.Count));
+            Sprite randomImage = tmpListOfImages.ElementAt(UnityEngine.Random.Range(0, tmpListOfImages.Count));
             child.GetChild(0).GetComponent<SpriteRenderer>().sprite = randomImage;
             child.GetComponent<CardController>().cardFace = randomImage;
 
@@ -148,24 +148,42 @@ public class MainController : MonoBehaviour
         {
             playerAndValueSorted.Remove(playerAndValueSorted.Last());
         }
-        File.WriteAllLines(Application.persistentDataPath + "/score.txt",
-                    playerAndValueSorted.Select(e => string.Format("{0};{1}", e.Key, e.Value)));
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/score.dat");
+        ScoreData data = new ScoreData();
+        data.scores = new int[playerAndValueSorted.Count];
+        data.nicks = new string[playerAndValueSorted.Count];
+
+        for (int i = 0; i < playerAndValueSorted.Count ; i++)
+        {
+            data.nicks[i] = playerAndValueSorted[i].Key;
+            data.scores[i] = playerAndValueSorted[i].Value;
+        }
+
+        bf.Serialize(file, data);
+        file.Close();
+
         ShowScores();
     }
 
     public void Load()
     {
-        if (!File.Exists(Application.persistentDataPath + "/score.txt"))
+        if (!File.Exists(Application.persistentDataPath + "/score.dat"))
         {
             Debug.LogError("File not found");
             return;
         }
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/score.dat", FileMode.Open);
+        ScoreData data = (ScoreData)bf.Deserialize(file);
 
-        string[] lines = File.ReadAllLines(Application.persistentDataPath + "/score.txt");
-        foreach(string line in lines)
+        file.Close();
+
+        for (int i = 0; i < data.nicks.Length ; i++)
         {
-            string[] pair = line.Split(';');
-            playerAndValue.Add(new KeyValuePair<string, int>(pair[0], System.Convert.ToInt32(pair[1])));
+            playerAndValue.Add(new KeyValuePair<string, int>(data.nicks[i], data.scores[i]));
+
         }
 
         ShowScores();
@@ -186,4 +204,10 @@ public class MainController : MonoBehaviour
             }
         }
     }
+}
+[Serializable]
+class ScoreData
+{
+    public int[] scores;
+    public string[] nicks;
 }

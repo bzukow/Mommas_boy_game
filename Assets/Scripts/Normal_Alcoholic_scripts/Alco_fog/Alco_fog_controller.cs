@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Alco_fog_controller : MonoBehaviour
 {
@@ -27,36 +28,34 @@ public class Alco_fog_controller : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !left)
+        {
+            GameObject.FindGameObjectWithTag("PPV").GetComponent<PostProcessVolume>().profile.TryGetSettings(out chromaticAberration);
+            chromaticAberration.active = true;
+            chromaticAberration.intensity.value = intensity;
+            other.transform.GetComponent<Animator>().SetBool("isInSmoke", true);
+        }
+    }
+    public float intensity = 0.87f;
+    ChromaticAberration chromaticAberration = null;
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && !left)
         {
             if (graphicContainer != null)
             {
                 graphicContainer.gameObject.SetActive(false);
             }
-        }
-        if (other.CompareTag("Player") && !left)
-        {
-            other.transform.GetComponent<Animator>().SetBool("isInSmoke", true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && !left)
-        {
             left = true;
             Invoke("WaitWithDebuff", 6);
         }
     }
 
-    //void Update()
-    //{
-        //jesli dostanie fajka to usunale moze to w fajku u zioma? zagrac w ogoole foga ja sie 
-        //chowa czy cos, albo jakies puff i wtedy destroy w animatorze 
-    //}
-
     void WaitWithDebuff()
     {
+        //wylacz efekt
+        GameObject.FindGameObjectWithTag("PPV").GetComponent<PostProcessVolume>().profile.TryGetSettings(out chromaticAberration);
+        chromaticAberration.active = false;        
         left = false;
         GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().canAttack = false;
         GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().SetBool("isInSmoke", false);

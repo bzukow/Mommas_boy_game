@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering.PostProcessing;
 public class Normal_alcoholic_controller : MonoBehaviour
 {
     Animator anim;
     GameObject cigaretteCatched;
+    public Transform[] particleSystems;
     public Transform fog;
 
     // Start is called before the first frame update
@@ -34,12 +35,18 @@ public class Normal_alcoholic_controller : MonoBehaviour
             anim.SetBool("isDrinking", true);
         }
     }
-
+    ChromaticAberration chromaticAberration = null;
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Cigarette"))
         {
+            foreach (Transform particleSystem in particleSystems)
+            {
+                particleSystem.GetComponent<ParticleSystem>().Stop();
+            }
             LoadSleeping();
+            GameObject.FindGameObjectWithTag("PPV").GetComponent<PostProcessVolume>().profile.TryGetSettings(out chromaticAberration);
+            chromaticAberration.active = false;
             GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().SetBool("isInSmoke", false);
             cigaretteCatched = collider.gameObject;
         }
@@ -61,5 +68,9 @@ public class Normal_alcoholic_controller : MonoBehaviour
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<CapsuleCollider>().enabled = false;
         fog.GetComponent<SphereCollider>().enabled = false;
+        if (fog.GetComponent<Alco_fog_controller>().graphicContainer != null)
+        {
+            fog.GetComponent<Alco_fog_controller>().graphicContainer.gameObject.SetActive(false);
+        }
     }
 }

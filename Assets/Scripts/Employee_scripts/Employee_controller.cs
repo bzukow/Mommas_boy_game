@@ -13,10 +13,16 @@ public class Employee_controller : MonoBehaviour
     public bool waitWithAnotherCaught;
     public GameObject[] colliders;
     public GameObject bubbleText;
+    public GameObject graphic_container;
+    public Transform[] particleSystems;
     //public bool canTakeLives;
     // Start is called before the first frame update
     void Start()
     {
+        foreach (Transform particleSystem in particleSystems)
+        {
+            particleSystem.GetComponent<ParticleSystem>().Stop();
+        }
         player = GameObject.FindGameObjectWithTag("Player");
         anim = transform.GetComponent<Animator>();
         anim_player = player.GetComponent<Animator>();
@@ -72,6 +78,14 @@ public class Employee_controller : MonoBehaviour
 
     public void ReleasePlayer()
     {
+        foreach (Transform particleSystem in particleSystems)
+        {
+            particleSystem.GetComponent<ParticleSystem>().Stop();
+        }
+        if (graphic_container != null)
+        {
+            graphic_container.SetActive(false);
+        }
         if (player.GetComponent<Character_controller>().lives < 1)
         {
             bubbleText.GetComponent<TextMesh>().text = "Feel free to visit\nus again!";
@@ -79,6 +93,7 @@ public class Employee_controller : MonoBehaviour
             anim.SetBool("CharacterHasBeenSeen", false);
         } else
         {
+            
             bubbleText.GetComponent<TextMesh>().text = "WHY YOU REJECTED\nME I'M GOING TO\nCALL THE POLICE";
             anim_player.SetBool("isParalised", false);
             SwitchOffColliders();
@@ -87,12 +102,17 @@ public class Employee_controller : MonoBehaviour
             
         }
     }
-    public void AfterReleasePlayer()
-    {
-
-    }
     public void CatchPlayer()
     {
+        foreach (Transform particleSystem in particleSystems)
+        {
+            particleSystem.GetComponent<ParticleSystem>().Play();
+        }
+        if (graphic_container != null)
+        {
+            graphic_container.SetActive(true);
+        }
+        
         bubbleText.GetComponent<TextMesh>().text = "bla bla\nbla bla bla\nbla bla";
         anim_player.SetBool("isParalised", true);
         player.GetComponent<Character_controller>().Stunned();
