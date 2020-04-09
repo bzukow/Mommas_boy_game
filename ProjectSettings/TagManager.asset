@@ -30,6 +30,7 @@ TagManager:
   - Scoreboard
   - MyBool
   - PPV
+  - ArtistButton
   layers:
   - Default
   - TransparentFX

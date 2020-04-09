@@ -31,6 +31,6 @@ public class New_Game : MonoBehaviour
     {
         float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene("LoadingScene");
     }
 }

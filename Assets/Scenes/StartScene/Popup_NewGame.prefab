@@ -312,7 +312,7 @@ Animator:
   m_GameObject: {fileID: 4034761543133027175}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97bf9cca7a6e6fa4bb56fde53fedd65f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d69f9cf07ac4acf418c3ef0528c43bd5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -489,7 +489,7 @@ Animator:
   m_GameObject: {fileID: 5457530248185964962}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97bf9cca7a6e6fa4bb56fde53fedd65f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d69f9cf07ac4acf418c3ef0528c43bd5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 3553912445974702833}
   - component: {fileID: 2222343092252147824}
   m_Layer: 5
-  m_Name: Popup_NewGame 1
+  m_Name: Popup_NewGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

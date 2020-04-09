@@ -16,6 +16,6 @@ public class NewGame_YesButton : MonoBehaviour
     {
         float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene("LoadingScene");
     }
 }

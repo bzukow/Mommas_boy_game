@@ -29,6 +29,11 @@ public class Touch_the_hat : MonoBehaviour
         {
             if (collider.CompareTag("Player"))
             {
+                if (gc.anim.GetBool("isThrowing"))
+                {
+                    gc.anim.SetBool("isThrowing", false);
+                    gc.canMove = true;
+                }
                 if (GameObject.FindGameObjectWithTag("Beret"))
                 {
                     GameObject.FindGameObjectWithTag("Beret").GetComponent<Deadly_hat>().moveUp = false;

@@ -117,11 +117,18 @@ public class Grandma_controller : MonoBehaviour
         lives--;
         canTakeGrandmaLive = true;
     }
+    public ParticleSystem puffDying;
     public void WaitAndDelete()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        puffDying.transform.SetParent(null);
+        puffDying.Play();
     }
-
+    public void DyingGrandma()
+    {
+        Destroy(puffDying.gameObject);
+        Destroy(transform.parent.gameObject);
+    }
     public void ThrowingHasFinished()
     {
         canMove = true;
@@ -147,6 +154,6 @@ public class Grandma_controller : MonoBehaviour
 
     public void Onion_appeared()
     {
-        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,0.5f,0), this.transform.rotation, null);
+        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,-1f,0), this.transform.rotation, null);
     }
 }

@@ -26,4 +26,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Additional_Game/AdditionalGame.unity
     guid: 5cb5d2de3a394ee4fa0bd2dca0ae6aa5
+  - enabled: 1
+    path: Assets/Scenes/Endings/UselessPastaScene.unity
+    guid: b0d4982df52266946a67ebb2b10f20a5
+  - enabled: 1
+    path: Assets/Scenes/Endings/SelfishScene.unity
+    guid: 7a4ce2cdb9279154e89903a4af87c5ff
+  - enabled: 1
+    path: Assets/Scenes/Endings/HousekeeperScene.unity
+    guid: 0f098f29da63d924b8482c0e5b9d20fb
+  - enabled: 1
+    path: Assets/Scenes/Endings/ChickenSoupScene.unity
+    guid: b44a49ddfbf0d7b44a04847721512453
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene/LoadingScene.unity
+    guid: 2b860be669537ae41921e4823ee2fe9a
   m_configObjects: {}

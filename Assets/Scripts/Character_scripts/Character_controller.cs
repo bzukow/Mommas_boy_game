@@ -473,6 +473,7 @@ public class Character_controller : MonoBehaviour
         }
         if ((collision.transform.CompareTag("Monster") || collision.transform.CompareTag("Grandma")) && !immortal)
         {
+            immortal = true;
             stunned = true;
             Invoke("TakeLives", 1.0f);
             anim.SetBool("isHitted", true);
@@ -504,8 +505,12 @@ public class Character_controller : MonoBehaviour
         }
         if (collider.CompareTag("Beret") && !immortal)
         {
+            immortal = true;
             Invoke("TakeLives", 1.0f);
             anim.SetBool("isHitted", true);
+            collider.GetComponent<Deadly_hat>().moveUp = false;
+        } else if (collider.CompareTag("Beret") && immortal)
+        {
             collider.GetComponent<Deadly_hat>().moveUp = false;
         }
 
@@ -588,7 +593,7 @@ public class Character_controller : MonoBehaviour
         //TU??? ZE WSTAJE I ZA SZYBKO IDZIE
 
         anim.SetBool("isHitted", false);
-        Invoke("NotImmortal", 2f);
+        //Invoke("NotImmortal", 2f);
     }
 
     public void FinishTheGame()
@@ -601,6 +606,7 @@ public class Character_controller : MonoBehaviour
 
     public void TakeLives()
     {
+        immortal = true;
         throwing_cigarette_line.SetActive(false);
         anim.SetBool("isCigaretteThrown", false);
         lives--;
@@ -640,17 +646,24 @@ public class Character_controller : MonoBehaviour
     {
         immortal = true;
     }
-    void NotImmortal()
-    {
-        stunned = false;
-        immortal = false;
-    }
-
+    bool canBlink;
     void Blink()
     {
-        StartCoroutine(DoBlinks(2f, 0.1f));
+        if (!canBlink)
+        {
+            canBlink = true;
+            Invoke("ShutBlink", 4.0f);
+            StartCoroutine(DoBlinks(0.8f, 0.1f));
+        }
     }
+    void ShutBlink()
+    {
 
+        print("wylacza blinka");
+        stunned = false;
+        immortal = false;
+        canBlink = false;
+    }
     IEnumerator DoBlinks(float duration, float blinkTime)
     {
         canAttack = false;
@@ -670,6 +683,8 @@ public class Character_controller : MonoBehaviour
 
             playerSkin.enabled = true;
             macheteSkin.enabled = true;
+            canAttack = true;
+            yield break;
         } else
         {
             SkinnedMeshRenderer playerSkin = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<SkinnedMeshRenderer>();
@@ -681,9 +696,10 @@ public class Character_controller : MonoBehaviour
             }
 
             playerSkin.enabled = true;
+            canAttack = true;
+            yield break;
         }
         
-        canAttack = true;
     }
 
     void Eaten()
@@ -737,16 +753,16 @@ public class Character_controller : MonoBehaviour
 
         if (tripoloskiPack && thingPack)
         {
-            return "chicken_soup_is_better";//juz nie trzeba, ojciec chce rosol
+            return "chicken_soup_is_better";
         } else if (tripoloskiPack && !thingPack)
         {
-            return "selfish";//you always remember only abpu yourself, i think you have to finally find a job and move out from our house.
+            return "selfish";
         }else if (!tripoloskiPack && thingPack)
         { 
-            return "im_not_your_housekeeper"; //ja ci wiecej prac nie bede, trzeba bylo kupic. Dzięki ale juz nie trzeba, ojciec chce rosol
+            return "im_not_your_housekeeper"; 
         } else
         {
-            return "useless_pasta";//jak zwykle bezuzyteczny. Dobrze zee kupiles makaron ktorego nawet ne bylo na liscie. at least we will be ready for the apocalypse now.
+            return "useless_pasta";
         }
     }
     public GameObject bubbleText;
@@ -770,8 +786,7 @@ public class Character_controller : MonoBehaviour
     {
         float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene("Level");
-        //zaladowac od checkpointa
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public void CloseDialogBubble()

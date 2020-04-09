@@ -15414,7 +15414,7 @@ GameObject:
   - component: {fileID: 370436338}
   m_Layer: 5
   m_Name: ButtonOnHoverToSwitchOff
-  m_TagString: Untagged
+  m_TagString: ArtistButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51606,7 +51606,7 @@ Animator:
   m_GameObject: {fileID: 1211642244}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97bf9cca7a6e6fa4bb56fde53fedd65f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d69f9cf07ac4acf418c3ef0528c43bd5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -54090,7 +54090,7 @@ Animator:
   m_GameObject: {fileID: 1278017880}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97bf9cca7a6e6fa4bb56fde53fedd65f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d69f9cf07ac4acf418c3ef0528c43bd5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -57127,7 +57127,7 @@ Animator:
   m_GameObject: {fileID: 1347707472}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97bf9cca7a6e6fa4bb56fde53fedd65f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d69f9cf07ac4acf418c3ef0528c43bd5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -62319,7 +62319,7 @@ Animator:
   m_GameObject: {fileID: 1485249906}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97bf9cca7a6e6fa4bb56fde53fedd65f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d69f9cf07ac4acf418c3ef0528c43bd5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -89159,7 +89159,7 @@ GameObject:
   - component: {fileID: 2142206696}
   m_Layer: 5
   m_Name: ButtonToSwitchOn
-  m_TagString: Untagged
+  m_TagString: ArtistButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

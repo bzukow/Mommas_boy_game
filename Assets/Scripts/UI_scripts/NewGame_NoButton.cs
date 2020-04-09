@@ -5,8 +5,11 @@ using UnityEngine.UI;
 public class NewGame_NoButton : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Button ArtistButtonOne;
-    public Button ArtistButtonTwo;
+    public GameObject[] artistButtons;
+    void Start()
+    {
+        artistButtons = GameObject.FindGameObjectsWithTag("ArtistButton");
+    }
     public void SwitchOfPopup()
     {
         Button[] buttons = GameObject.FindGameObjectWithTag("Canvas").GetComponentsInChildren<Button>();
@@ -14,8 +17,10 @@ public class NewGame_NoButton : MonoBehaviour
         {
             button.interactable = true;
         }
-        ArtistButtonOne.interactable = true;
-        ArtistButtonTwo.interactable = true;
+        foreach (GameObject button in artistButtons)
+        {
+            button.GetComponent<Button>().interactable = true;
+        }
         transform.parent.parent.GetComponent<Popup_NewGame_controller>().DeletePopup();
     }
 }
