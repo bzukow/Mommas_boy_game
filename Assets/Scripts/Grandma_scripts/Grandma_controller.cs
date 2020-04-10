@@ -120,9 +120,13 @@ public class Grandma_controller : MonoBehaviour
     public ParticleSystem puffDying;
     public void WaitAndDelete()
     {
-        gameObject.SetActive(false);
+        Invoke("TurnOffMesh", 0.3f);
         puffDying.transform.SetParent(null);
         puffDying.Play();
+    }
+    public void TurnOffMesh()
+    {
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
     }
     public void DyingGrandma()
     {

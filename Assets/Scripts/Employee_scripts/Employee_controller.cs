@@ -68,6 +68,11 @@ public class Employee_controller : MonoBehaviour
     }
     public void Death()
     {
+        if (bubbleText != null)
+        {
+            Destroy(bubbleText.transform.parent.gameObject);
+        }
+        Destroy(puffDying.gameObject);
         Destroy(transform.parent.gameObject);
 
     }
@@ -146,5 +151,15 @@ public class Employee_controller : MonoBehaviour
         {
             Destroy(collider);
         }
+    }
+    public ParticleSystem puffDying;
+    public void WaitAndDelete()
+    {
+        puffDying.transform.SetParent(null);
+        puffDying.Play();
+    }
+    public void TurnOffMesh()
+    {
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
     }
 }
