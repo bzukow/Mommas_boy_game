@@ -74,15 +74,11 @@ public class Character_controller : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody>();
         anim = this.GetComponent<Animator>();
-        displayedLives = GameObject.FindGameObjectWithTag("Lives").GetComponent<Life_display>().lives;
+        
 
         if (File.Exists(Application.persistentDataPath + "/Data.dat"))
         {
             GameObject.FindGameObjectWithTag("Saver").GetComponent<Save_Load_Controller>().LoadGame();
-            //sprawdzic cy dziala
-            LivesUpdatedAfterLoading();
-
-
         }
         else
         {
@@ -109,12 +105,14 @@ public class Character_controller : MonoBehaviour
             anim.SetBool("enter_the_lift", true);
             started1 = true;
 
-            coins = 30f;
+            coins = 0f;
             lives = 5f;
-            cigarettes = 20f;
+            cigarettes = 10f;
             numbers.WaitforActualisation(shrimps, chilli, chicken, onions, mushrooms, limes, coconut_milk, toilet_paper);
         }
 
+        displayedLives = GameObject.FindGameObjectWithTag("Lives").GetComponent<Life_display>().lives;
+        LivesUpdatedAfterLoading();
         eaten = false;
         escaped = true;
         facingLeft = false;
@@ -132,7 +130,9 @@ public class Character_controller : MonoBehaviour
         {
             if(i > lives)
             {
+
                 Destroy(displayedLives[i-1].gameObject);
+                displayedLives.RemoveAt(i - 1);
             }
         }
     }
@@ -389,7 +389,7 @@ public class Character_controller : MonoBehaviour
     public bool canTakeLives;
     public void DisplayLessLives()
     {
-        StartCoroutine(TakeLivesEmployee(5f, 1f));
+        StartCoroutine(TakeLivesEmployee((int)lives, 1f));
     }
     IEnumerator TakeLivesEmployee(float duration, float blinkTime)
     {
@@ -520,12 +520,16 @@ public class Character_controller : MonoBehaviour
             {
                 //audios[0].Play();
                 coins++;
-                coinAmount.text = "x "+ coins.ToString();
+                UpdateCoinAmount();
                 Destroy(collider.gameObject);
                 eaten = true;
                 Invoke("Eaten", 0);
             }
         }
+    }
+    public void UpdateCoinAmount()
+    {
+        coinAmount.text = "x " + coins.ToString();
     }
     public Text coinAmount;
     public Text cigaretteAmount;

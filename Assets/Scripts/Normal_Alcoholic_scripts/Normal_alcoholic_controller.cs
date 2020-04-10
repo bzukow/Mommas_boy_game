@@ -8,6 +8,7 @@ public class Normal_alcoholic_controller : MonoBehaviour
     GameObject cigaretteCatched;
     public Transform[] particleSystems;
     public Transform fog;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,10 @@ public class Normal_alcoholic_controller : MonoBehaviour
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<CapsuleCollider>().enabled = false;
         fog.GetComponent<SphereCollider>().enabled = false;
+        foreach (Transform particleSystem in particleSystems)
+        {
+            particleSystem.GetComponent<ParticleSystem>().Stop();
+        }
         if (fog.GetComponent<Alco_fog_controller>().graphicContainer != null)
         {
             fog.GetComponent<Alco_fog_controller>().graphicContainer.gameObject.SetActive(false);

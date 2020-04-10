@@ -64,6 +64,7 @@
     <Compile Include="Assets\AdditionalGameContent\Scripts\ResetScript.cs" />
     <Compile Include="Assets\AdditionalGameContent\Scripts\SaveNickname.cs" />
     <Compile Include="Assets\AdditionalGameContent\Scripts\StartScript.cs" />
+    <Compile Include="Assets\Player_target_camera.cs" />
     <Compile Include="Assets\Scenes\Endings\Main _character_end\Ending_character_controller.cs" />
     <Compile Include="Assets\Scenes\Endings\Main _character_end\RightArm_TakingAlco.cs" />
     <Compile Include="Assets\Scenes\LoadingScene\SceneLoading.cs" />

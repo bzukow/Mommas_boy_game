@@ -5,7 +5,6 @@ using UnityEngine;
 public class Character_follow_secondVersion : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Transform target;
 
     /*public float smoothSpeed = 10.1f;
     public Vector3 offset;
@@ -28,7 +27,7 @@ public class Character_follow_secondVersion : MonoBehaviour
         Vector3 position = this.transform.position;
         position.y = Mathf.Lerp(this.transform.position.y, objectToFollow.transform.position.y, interpolation);
         position.x = Mathf.Lerp(this.transform.position.x, objectToFollow.transform.position.x, interpolation);
-
+        position.z = Mathf.Lerp(this.transform.position.z, objectToFollow.transform.position.z, interpolation);
         this.transform.position = position;
     }
 }

@@ -13,6 +13,8 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
     public string textInside;
     public float firstTime;
     public float alreadyUsed;
+    public float amountToTake;
+    public bool isTroll;
 
     void Start()
     {
@@ -31,28 +33,39 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
                 {
                     bubbleText.GetComponent<TextMesh>().text = "Here we go again!";
                     Invoke("Teleport", 2f);
-                } else
+                }
+                else
                 {
                     float amountCoins = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins;
-                    if (amountCoins >= 10 && !eaten)
+                    if (amountCoins >= amountToTake && firstTime == 1 && !eaten)
                     {
-                        if (firstTime == 0)
-                        {
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins -= 13;
-                            bubbleText.GetComponent<TextMesh>().text = "You see? It was't\nthat hard.\nPrepare yourself for\nsome magic...";
-
-                        }
-                        else
-                        {
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins -= 12;
-                            bubbleText.GetComponent<TextMesh>().text = "World needs such\na good people like\nyou... Here's some magic\nfor you";
-                        }
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins -= amountToTake;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().UpdateCoinAmount();
+                        bubbleText.GetComponent<TextMesh>().text = "World needs such\na good people like\nyou... Here's some magic\nfor you";
                         //audios[1].Play();
                         eaten = true;
                         dont = false;
                         Invoke("Teleport", 2f);
                         Invoke("Eaten", 1);
-
+                    }
+                    else if (firstTime == 0 && amountCoins >= amountToTake + 1f && !eaten)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins -= amountToTake +1f;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().UpdateCoinAmount();
+                        bubbleText.GetComponent<TextMesh>().text = "You see? It was't\nthat hard.\nPrepare yourself for\nsome magic...";
+                        eaten = true;
+                        dont = false;
+                        Invoke("Teleport", 2f);
+                        Invoke("Eaten", 1);
+                    } else if (isTroll)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins -= amountToTake;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().UpdateCoinAmount();
+                        bubbleText.GetComponent<TextMesh>().text = "... I meant three\nhehe coins of course...";
+                        eaten = true;
+                        dont = false;
+                        Invoke("Teleport", 2f);
+                        Invoke("Eaten", 1);
                     }
                     else if (dont)
                     {
@@ -72,7 +85,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
             bubbleText.GetComponent<MeshRenderer>().enabled = true;
             if (firstTime == 0)
             {
-                bubbleText.GetComponent<TextMesh>().text = "You again? You should\nbe faster, now it's\n13 coins.";
+                bubbleText.GetComponent<TextMesh>().text = "You again? You should\nbe faster, you should\n know it won't be cheaper";
             }
             if (alreadyUsed == 1)
             {

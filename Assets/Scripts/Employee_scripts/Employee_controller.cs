@@ -31,7 +31,7 @@ public class Employee_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bubbleText.transform.parent.position = new Vector3(transform.position.x, transform.position.y+5, transform.position.z -3 );
+        bubbleText.transform.parent.position = new Vector3(transform.position.x, bubbleText.transform.parent.position.y, bubbleText.transform.parent.position.z);
         //zaimplementowac ruch
         if (walking)
         {
@@ -46,6 +46,14 @@ public class Employee_controller : MonoBehaviour
 
                 anim.SetBool("CharacterHasBeenSeen", false);
                 transform.GetComponent<CapsuleCollider>().enabled = false;
+                ChangeDirection();
+            } else if (!anim_player.GetBool("isGrounded")) {
+                bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = false;
+                bubbleText.GetComponent<MeshRenderer>().enabled = false;
+
+                anim.SetBool("CharacterHasBeenSeen", false);
+                transform.GetComponent<CapsuleCollider>().enabled = false;
+                ChangeDirection();
             } else
             {
                 bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = true;
@@ -58,9 +66,9 @@ public class Employee_controller : MonoBehaviour
                     transform.position += transform.forward * Time.deltaTime * 7f;
                     transform.GetComponent<CapsuleCollider>().enabled = true;
                 }
-                
             }
-        } else
+        }
+        else
         {
             bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = false;
             bubbleText.GetComponent<MeshRenderer>().enabled = false;
@@ -158,8 +166,15 @@ public class Employee_controller : MonoBehaviour
         puffDying.transform.SetParent(null);
         puffDying.Play();
     }
+    public GameObject mushrooms;
     public void TurnOffMesh()
     {
+        if (mushrooms != null)
+        {
+            mushrooms.transform.SetParent(null);
+            mushrooms.transform.position = new Vector3(mushrooms.transform.position.x-2f, mushrooms.transform.position.y+1f, mushrooms.transform.position.z+2.5f);
+            mushrooms.SetActive(true);
+        }
         gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
     }
 }

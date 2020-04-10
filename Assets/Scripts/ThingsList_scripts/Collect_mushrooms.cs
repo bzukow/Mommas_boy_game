@@ -11,7 +11,6 @@ public class Collect_mushrooms : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
     }
-
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))

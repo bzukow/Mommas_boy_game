@@ -96,8 +96,7 @@ public class Grandma_controller : MonoBehaviour
                 {
                     canMove = false;
                     anim.SetBool("isHitted", true);
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().OpenDialogBubble("Wow what\nthat one is strong");
-                    Invoke("ClosePlayersDialog", 2f);
+                    Invoke("OpenPlayersDialog", 1f);
                     foreach (BoxCollider boxCollider in boxColliders)
                     {
                         boxCollider.enabled = true;
@@ -107,6 +106,11 @@ public class Grandma_controller : MonoBehaviour
                 Invoke("TakeGrandmaLife", 1f);
             }
         }
+    }
+    void OpenPlayersDialog()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().OpenDialogBubble("Wow what\nthat one is strong");
+        Invoke("ClosePlayersDialog", 2f);
     }
     void ClosePlayersDialog()
     {
@@ -158,6 +162,6 @@ public class Grandma_controller : MonoBehaviour
 
     public void Onion_appeared()
     {
-        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,-1f,0), this.transform.rotation, null);
+        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,-1f,-1f), this.transform.rotation, null);
     }
 }

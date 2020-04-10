@@ -5,7 +5,6 @@ using UnityEngine;
 public class Collect_onions : MonoBehaviour
 {
     public Character_controller player;
-    //trzeba w moomencie zapisu ogarnac
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();

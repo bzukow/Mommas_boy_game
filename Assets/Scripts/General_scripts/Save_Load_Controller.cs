@@ -53,7 +53,7 @@ public class Save_Load_Controller : MonoBehaviour
         }
 
         data.playerscoins = player.coins;
-        data.playerslives = player.lives;
+        data.playerslives = (int)player.lives;
         data.playerscigarettes = player.cigarettes;
         data.playersshrimps = player.shrimps;
         data.playerschilli = player.chilli;
@@ -74,6 +74,7 @@ public class Save_Load_Controller : MonoBehaviour
             data.grandmasPositions[i, 0] = grandmas[i].transform.parent.position.x;
             data.grandmasPositions[i, 1] = grandmas[i].transform.parent.position.y;
             data.grandmasPositions[i, 2] = grandmas[i].transform.parent.position.z;
+            print("zapisalo:" + grandmas[i].transform.parent.position);
         }
         data.employeesPositions = new float[employees.Length, 3];
         for (int i = 0; i < employees.Length; i++)
@@ -100,9 +101,9 @@ public class Save_Load_Controller : MonoBehaviour
         data.teleportersPositions = new float[teleporters.Length, 5];
         for (int i = 0; i < teleporters.Length; i++)
         {
-            data.teleportersPositions[i, 0] = teleporters[i].transform.position.x;
-            data.teleportersPositions[i, 1] = teleporters[i].transform.position.y;
-            data.teleportersPositions[i, 2] = teleporters[i].transform.position.z;
+            data.teleportersPositions[i, 0] = teleporters[i].transform.parent.position.x;
+            data.teleportersPositions[i, 1] = teleporters[i].transform.parent.position.y;
+            data.teleportersPositions[i, 2] = teleporters[i].transform.parent.position.z;
             data.teleportersPositions[i, 3] = teleporters[i].alreadyUsed;
             data.teleportersPositions[i, 4] = teleporters[i].firstTime;
         }
@@ -124,7 +125,7 @@ public class Save_Load_Controller : MonoBehaviour
         bf.Serialize(file, data);
         file.Close();
     }
-
+    PlayerData data;
     public void LoadGame()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
@@ -138,30 +139,11 @@ public class Save_Load_Controller : MonoBehaviour
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/Data.dat", FileMode.Open);
-        PlayerData data = (PlayerData)bf.Deserialize(file);
+        data = (PlayerData)bf.Deserialize(file);
 
         file.Close();
 
         PlayerPrefs.DeleteAll();
-
-        player.checkpoint = new Vector3(data.playersPosition[0], data.playersPosition[1], data.playersPosition[2]);
-        player.transform.position = player.checkpoint;
-        player.coins = data.playerscoins;
-        player.lives = data.playerslives;
-        player.cigarettes = data.playerscigarettes;
-        player.shrimps = data.playersshrimps;
-        player.chilli = data.playerschilli;
-        player.chicken = data.playerschicken;
-        player.onions = data.playersonions;
-        player.limes = data.playerslimes;
-        player.mushrooms = data.playersmushrooms;
-        player.coconut_milk = data.playerscoconut_milk;
-        player.toilet_paper = data.playerstoilet_paper;
-
-
-        player.tri_poloski_trousers = data.playerstripoloski_trousers;
-        player.tri_poloski_sweatshirt = data.playerstripoloski_sweatshirt;
-        player.tri_poloski_shoes = data.playerstripoloski_shoes;
 
         for(int i = 0; i < checks.Length; i++)
         {
@@ -170,6 +152,20 @@ public class Save_Load_Controller : MonoBehaviour
                 checks[i].SetActive(true);
             }
         }
+        List<Vector3> thingsSavedPositions = new List<Vector3>();
+        for (int i = 0; i < data.thingsFromListPositions.GetLength(0); i++)
+        {
+            thingsSavedPositions.Add(new Vector3(data.thingsFromListPositions[i, 0], data.thingsFromListPositions[i, 1], data.thingsFromListPositions[i, 2]));
+        }
+
+        foreach (GameObject thing in thingsFromList)
+        {
+            if (!thingsSavedPositions.Contains(thing.transform.position))
+            {
+                Destroy(thing.gameObject);
+            }
+        }
+        Invoke("LoadCheckpoint", 0.00000000001f);
 
         List<Vector3> grandmasSavedPositions = new List<Vector3>();
         for(int i = 0; i < data.grandmasPositions.GetLength(0); i++)
@@ -199,18 +195,21 @@ public class Save_Load_Controller : MonoBehaviour
             }
         }
 
+        List<Vector3> teleporterSavedPositions = new List<Vector3>();
+        for (int i = 0; i < data.teleportersPositions.GetLength(0); i++)
+        {
+            teleporterSavedPositions.Add(new Vector3(data.teleportersPositions[i, 0], data.teleportersPositions[i, 1], data.teleportersPositions[i, 2]));
+        }
+
         foreach (Teleporter_alcoholic_controller tac in teleporters)
         {
-            for (int i = 0; i < data.teleportersPositions.GetLength(0); i++)
+            if (!teleporterSavedPositions.Contains(tac.transform.parent.position))
             {
-                if (tac.transform.position.Equals(new Vector3(data.teleportersPositions[i, 0], data.teleportersPositions[i, 1], data.teleportersPositions[i, 2])))
-                {
-                    tac.alreadyUsed = data.teleportersPositions[i, 3];
-                    tac.firstTime = data.teleportersPositions[i, 4];
-                } else
-                {
-                    Destroy(tac.transform.parent.gameObject);
-                }
+                Destroy(tac.transform.parent.gameObject);
+            } else
+            {
+                tac.alreadyUsed = data.teleportersPositions[teleporterSavedPositions.IndexOf(tac.transform.parent.position), 3];
+                tac.firstTime = data.teleportersPositions[teleporterSavedPositions.IndexOf(tac.transform.parent.position), 4];
             }
         }
 
@@ -228,21 +227,6 @@ public class Save_Load_Controller : MonoBehaviour
             }
         }
 
-
-        List<Vector3> thingsSavedPositions = new List<Vector3>();
-        for (int i = 0; i < data.thingsFromListPositions.GetLength(0); i++)
-        {
-            thingsSavedPositions.Add(new Vector3(data.thingsFromListPositions[i, 0], data.thingsFromListPositions[i, 1], data.thingsFromListPositions[i, 2]));
-        }
-
-        foreach (GameObject thing in thingsFromList)
-        {
-            if (!thingsSavedPositions.Contains(thing.transform.position))
-            {
-                Destroy(thing.gameObject);
-            }
-        }
-
        List<Vector3> coinsSavedPositions = new List<Vector3>();
         for (int i = 0; i < data.coinsPositions.GetLength(0); i++)
         {
@@ -257,13 +241,40 @@ public class Save_Load_Controller : MonoBehaviour
             }
         }
 
+        //player.checkpoint = new Vector3(data.playersPosition[0], data.playersPosition[1], data.playersPosition[2]);
+        player.transform.position = player.checkpoint;
+        player.coins = data.playerscoins;
+        player.lives = data.playerslives;
+        player.cigarettes = data.playerscigarettes;
+        player.shrimps = data.playersshrimps;
+        player.chilli = data.playerschilli;
+        player.chicken = data.playerschicken;
+        player.onions = data.playersonions;
+        player.limes = data.playerslimes;
+        player.mushrooms = data.playersmushrooms;
+        player.coconut_milk = data.playerscoconut_milk;
+        player.toilet_paper = data.playerstoilet_paper;
+
+
+        player.tri_poloski_trousers = data.playerstripoloski_trousers;
+        player.tri_poloski_sweatshirt = data.playerstripoloski_sweatshirt;
+        player.tri_poloski_shoes = data.playerstripoloski_shoes;
+
+        
         Invoke("LoadThis", 1f);
+    }
+    void LoadCheckpoint()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
+        player.checkpoint = new Vector3(data.playersPosition[0], data.playersPosition[1], data.playersPosition[2]);
+        player.transform.position = player.checkpoint;
     }
     void LoadThis()
     {
         GameObject.FindGameObjectWithTag("ProductList").GetComponent<Sheet_cotroller>().isLoaded = true;
 
     }
+    
 }
 
 [Serializable]

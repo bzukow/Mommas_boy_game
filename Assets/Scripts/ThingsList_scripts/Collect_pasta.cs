@@ -15,4 +15,8 @@ public class Collect_pasta : MonoBehaviour
             Destroy(transform.parent.gameObject);
         }
     }
+    void OnTriggerExit(Collider collider)
+    {
+        Destroy(transform.parent.gameObject);
+    }
 }
