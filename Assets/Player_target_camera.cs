@@ -18,12 +18,12 @@ public class Player_target_camera : MonoBehaviour
     {
         if (!playerScript.facingLeft)
         {
-            transform.position = new Vector3(player.transform.position.x + 3f, player.transform.position.y + 4f, player.transform.position.z - 11f);
+            transform.position = new Vector3(player.transform.position.x + 3f, player.transform.position.y + 4f, player.transform.position.z - 12f);
 
         }
         else
         {
-            transform.position = new Vector3(player.transform.position.x -3f, player.transform.position.y + 4f, player.transform.position.z - 11f);
+            transform.position = new Vector3(player.transform.position.x -3f, player.transform.position.y + 4f, player.transform.position.z - 12f);
         }
     }
 }

@@ -17,7 +17,7 @@ public class Grandma_controller : MonoBehaviour
     public Deadly_hat hatPrefab;
     public bool canTakeGrandmaLive;
     bool enterOnce;
-
+    public bool touchedTheTop;
     public BoxCollider hatArea_BoxCollider;
     void Start()
     {

@@ -19,7 +19,7 @@ public class Sheet_cotroller : MonoBehaviour
     public NumbersSheet numbers;
 
     public bool isLoaded;
-
+    public bool readInput;
     void Update()
     {
         if (switchStart)
@@ -39,11 +39,12 @@ public class Sheet_cotroller : MonoBehaviour
                 });
                 ListButton.GetComponent<Button>().enabled = false;
                 switchStart = false;
+                readInput = true;
             }
-
         }
         else if (isLoaded)
         {
+            
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(true);
@@ -57,10 +58,14 @@ public class Sheet_cotroller : MonoBehaviour
             });
             ListButton.GetComponent<Button>().enabled = false;
             isLoaded = false;
+            readInput = true;
         }
-         if (Input.GetKeyDown(KeyCode.Tab) && !hasPlayerStarted.started)
+        if (readInput)
         {
-            ExitWithAButton();
+            if ((Input.GetKeyDown(KeyCode.Tab) && !hasPlayerStarted.started))
+            {
+                ExitWithAButton();
+            }
         }
     }
 

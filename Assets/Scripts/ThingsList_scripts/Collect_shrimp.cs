@@ -19,7 +19,7 @@ public class Collect_shrimp : MonoBehaviour
             if (player.canCollect)
             {
                 player.canCollect = false;
-                Invoke("Collect", 0.1f);
+                Invoke("Collect", 0f);
             }
         }
     }

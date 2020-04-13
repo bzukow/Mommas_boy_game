@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class Character_follow_secondVersion : MonoBehaviour
 {
-    // Start is called before the first frame update
 
-    /*public float smoothSpeed = 10.1f;
-    public Vector3 offset;
-    void FixedUpdate()
-    {
-        Vector3 desiredPosition = target.position + new Vector3(0,0,-5) + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed*Time.deltaTime);
-        transform.position = smoothedPosition;
-
-        transform.LookAt(target);
-    }*/
     public GameObject objectToFollow;
 
     public float speed = 2.0f;

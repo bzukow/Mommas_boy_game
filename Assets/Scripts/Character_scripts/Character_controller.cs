@@ -140,11 +140,13 @@ public class Character_controller : MonoBehaviour
     public KeyCode lastClickedKey;
     // Update is called once per frame
     public bool lift1tolift2;
+    
     void Update()
     {
-        bubbleText.transform.parent.position = new Vector3(transform.position.x - 3, transform.position.y + 5, transform.position.z -3);
+        bubbleText.transform.parent.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z -4);
         if (started)
         {
+            
             stunned = true;
             canAttack = false;
             
@@ -379,7 +381,7 @@ public class Character_controller : MonoBehaviour
     }
     void FirstCigarette()
     {
-        if (cigarettes==19)
+        if (cigarettes==9)
         {
             OpenDialogBubble("I will for sure\nneed one after\nthis trip...");
             Invoke("CloseDialogBubble", 4f);
@@ -473,6 +475,15 @@ public class Character_controller : MonoBehaviour
         }
         if ((collision.transform.CompareTag("Monster") || collision.transform.CompareTag("Grandma")) && !immortal)
         {
+            if (collision.transform.CompareTag("Grandma")){
+                Grandma_controller gc = collision.transform.GetComponent<Grandma_controller>();
+                if (gc.touchedTheTop)
+                {
+                    grandma_top_collider = collision.transform.GetComponent<BoxCollider>();
+                    grandma_top_collider.enabled = false;
+                    Invoke("GrandmaCanTouchAgain", 1f);
+                }
+            }
             immortal = true;
             stunned = true;
             Invoke("TakeLives", 1.0f);
@@ -480,7 +491,14 @@ public class Character_controller : MonoBehaviour
 
         }
     }
-
+    BoxCollider grandma_top_collider;
+    void GrandmaCanTouchAgain()
+    {
+        
+        grandma_top_collider.enabled = true;
+        grandma_top_collider.transform.GetComponent<Grandma_controller>().touchedTheTop = false;
+        grandma_top_collider = null;
+    }
     void OnCollisionExit(Collision collision)
     {
         if (collision.transform.CompareTag("Ground"))
@@ -523,7 +541,7 @@ public class Character_controller : MonoBehaviour
                 UpdateCoinAmount();
                 Destroy(collider.gameObject);
                 eaten = true;
-                Invoke("Eaten", 0);
+                Invoke("Eaten", 0f);
             }
         }
     }

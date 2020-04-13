@@ -32,6 +32,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
                 if (alreadyUsed == 1)
                 {
                     bubbleText.GetComponent<TextMesh>().text = "Here we go again!";
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().stunned = true;
                     Invoke("Teleport", 2f);
                 }
                 else
@@ -45,6 +46,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
                         //audios[1].Play();
                         eaten = true;
                         dont = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().stunned = true;
                         Invoke("Teleport", 2f);
                         Invoke("Eaten", 1);
                     }
@@ -55,6 +57,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
                         bubbleText.GetComponent<TextMesh>().text = "You see? It was't\nthat hard.\nPrepare yourself for\nsome magic...";
                         eaten = true;
                         dont = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().stunned = true;
                         Invoke("Teleport", 2f);
                         Invoke("Eaten", 1);
                     } else if (isTroll)
@@ -64,6 +67,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
                         bubbleText.GetComponent<TextMesh>().text = "... I meant three\nhehe coins of course...";
                         eaten = true;
                         dont = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().stunned = true;
                         Invoke("Teleport", 2f);
                         Invoke("Eaten", 1);
                     }
@@ -114,6 +118,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
     void Teleport()
     {
         GameObject.FindGameObjectWithTag("Player").transform.position = target.position;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().stunned = false;
         alreadyUsed = 1;
     }
 }
