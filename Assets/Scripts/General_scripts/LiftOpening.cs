@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LiftOpening : MonoBehaviour
 {
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerStay(Collider collider)
     {
         if (collider.CompareTag("Player"))
         {

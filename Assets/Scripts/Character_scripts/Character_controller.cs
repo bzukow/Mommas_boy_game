@@ -757,19 +757,20 @@ public class Character_controller : MonoBehaviour
         List<float> listOfTriPoloski = new List<float>()
         {
             tri_poloski_shoes, tri_poloski_sweatshirt, tri_poloski_trousers
-            
         };
         List<float> listOfThings = new List<float>()
         {
             chilli, chicken, onions, limes, toilet_paper, coconut_milk, mushrooms, shrimps
         };
 
-        if (listOfTriPoloski.All(o => o == listOfTriPoloski.First()))
+        if (listOfTriPoloski.All(o => o.Equals(true)))
         {
+            print("weszlo anie powinno");
             tripoloskiPack = true;
         }
-        if (listOfThings.All(o => o == listOfThings.First()))
+        if (listOfThings.All(o => o.Equals(true)))
         {
+            print("weszlo anie powinno");
             thingPack = true;
         }
 

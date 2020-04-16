@@ -18,6 +18,8 @@ public class Save_Load_Controller : MonoBehaviour
 
     GameObject[] coins;
     public GameObject[] checks;
+    public Transform lastWayCollder;
+
     public void SaveGame()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
@@ -129,7 +131,6 @@ public class Save_Load_Controller : MonoBehaviour
     public void LoadGame()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
-
         grandmas = FindObjectsOfType<Grandma_controller>();
         employees = FindObjectsOfType<Employee_controller>();
         teleporters = FindObjectsOfType<Teleporter_alcoholic_controller>();
@@ -266,8 +267,14 @@ public class Save_Load_Controller : MonoBehaviour
     void LoadCheckpoint()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
+
         player.checkpoint = new Vector3(data.playersPosition[0], data.playersPosition[1], data.playersPosition[2]);
         player.transform.position = player.checkpoint;
+
+        if (player.checkpoint.Equals(new Vector3(119.2f, -5.71f, 2.62f)))
+        {
+            lastWayCollder.GetComponent<BoxCollider>().isTrigger = false;
+        }
     }
     void LoadThis()
     {

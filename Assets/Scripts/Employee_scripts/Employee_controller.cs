@@ -15,6 +15,8 @@ public class Employee_controller : MonoBehaviour
     public GameObject bubbleText;
     public GameObject graphic_container;
     public Transform[] particleSystems;
+    public bool hasStopper;
+    public bool stopCollider;
     //public bool canTakeLives;
     // Start is called before the first frame update
     void Start()
@@ -27,12 +29,11 @@ public class Employee_controller : MonoBehaviour
         anim = transform.GetComponent<Animator>();
         anim_player = player.GetComponent<Animator>();
     }
-
+    bool seen;
     // Update is called once per frame
     void Update()
     {
         bubbleText.transform.parent.position = new Vector3(transform.position.x, bubbleText.transform.parent.position.y, bubbleText.transform.parent.position.z);
-        //zaimplementowac ruch
         if (walking)
         {
             transform.position += transform.forward * Time.deltaTime * 4f;
@@ -41,19 +42,27 @@ public class Employee_controller : MonoBehaviour
         {
             if (anim_player.GetBool("isCreepingDown"))
             {
+                if (seen)
+                {
+                    ChangeDirection();
+                    seen = false;
+                }
                 bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = false;
                 bubbleText.GetComponent<MeshRenderer>().enabled = false;
 
                 anim.SetBool("CharacterHasBeenSeen", false);
                 transform.GetComponent<CapsuleCollider>().enabled = false;
-                ChangeDirection();
             } else if (!anim_player.GetBool("isGrounded")) {
+                if (seen)
+                {
+                    ChangeDirection();
+                    seen = false;
+                }
                 bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = false;
                 bubbleText.GetComponent<MeshRenderer>().enabled = false;
 
                 anim.SetBool("CharacterHasBeenSeen", false);
                 transform.GetComponent<CapsuleCollider>().enabled = false;
-                ChangeDirection();
             } else
             {
                 bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = true;
@@ -61,6 +70,7 @@ public class Employee_controller : MonoBehaviour
 
                 walking = false;
                 anim.SetBool("CharacterHasBeenSeen", true);
+                seen = true;
                 if (!anim.GetBool("CharacterHasBeenCaught") && !waitWithAnotherCaught)
                 {
                     transform.position += transform.forward * Time.deltaTime * 7f;
@@ -88,7 +98,13 @@ public class Employee_controller : MonoBehaviour
     {
         transform.Rotate(0, 180, 0);
     }
-
+    public void StopCollider()
+    {
+        if (hasStopper)
+        {
+            stopCollider = !stopCollider;
+        }
+    }
     public void ReleasePlayer()
     {
         foreach (Transform particleSystem in particleSystems)

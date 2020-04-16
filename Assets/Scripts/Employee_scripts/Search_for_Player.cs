@@ -7,6 +7,7 @@ public class Search_for_Player : MonoBehaviour
     GameObject player;
     public Employee_controller employee;
     Animator anim_player;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +16,25 @@ public class Search_for_Player : MonoBehaviour
     }
     void Update()
     {
-        transform.position = employee.transform.position;
+        if (employee.hasStopper)
+        {
+            if (!employee.stopCollider)
+            {
+                transform.position = employee.transform.position;
+            }
+        } else
+        {
+            transform.position = employee.transform.position;
+        }
+        
     }
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))
         {
             employee.playerSeen = true;
-            if ((player.transform.eulerAngles.y > 265 && employee.transform.eulerAngles.y > 265)
+
+            if (!player.GetComponent<Animator>().GetBool("isCreepingDown") && (player.transform.eulerAngles.y > 265 && employee.transform.eulerAngles.y > 265)
                     || (player.transform.eulerAngles.y < 93 && employee.transform.eulerAngles.y < 93))
             {
                 employee.transform.Rotate(0, 180, 0);

@@ -11520,17 +11520,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1244160419}
-  - {fileID: 1290229812}
-  - {fileID: 1763629447}
-  - {fileID: 1577695526}
-  - {fileID: 873325167}
+  - {fileID: 690208987}
   - {fileID: 344365113}
+  - {fileID: 1763629447}
   - {fileID: 643705704}
   - {fileID: 865920812}
-  - {fileID: 690208987}
+  - {fileID: 1290229812}
+  - {fileID: 873325167}
   - {fileID: 912572003}
   - {fileID: 589137728}
   - {fileID: 1890743756}
+  - {fileID: 1577695526}
   - {fileID: 132884789}
   - {fileID: 1904142680}
   - {fileID: 1481898719}
@@ -29503,6 +29503,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 477046709}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &625891689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 625891691}
+  - component: {fileID: 625891690}
+  m_Layer: 8
+  m_Name: PostProcessingObject
+  m_TagString: PPV
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &625891690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625891689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 0a3afd3be667ed046a291ca80b0ffddd, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!4 &625891691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625891689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.9179, y: -10.57286, z: 6.7434173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &628908160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29896,17 +29944,17 @@ Transform:
   - {fileID: 125238672}
   - {fileID: 348736478}
   - {fileID: 2012985361}
-  - {fileID: 816474420}
-  - {fileID: 582405472}
-  - {fileID: 27762973}
-  - {fileID: 101739626}
-  - {fileID: 671444615}
-  - {fileID: 649800281}
-  - {fileID: 1412957304}
   - {fileID: 930964527}
+  - {fileID: 649800281}
+  - {fileID: 816474420}
+  - {fileID: 1412957304}
+  - {fileID: 582405472}
   - {fileID: 1170880972}
+  - {fileID: 27762973}
   - {fileID: 1017722778}
+  - {fileID: 101739626}
   - {fileID: 1188377470}
+  - {fileID: 671444615}
   - {fileID: 805959421}
   - {fileID: 1465887737}
   - {fileID: 1711474104}
@@ -43929,8 +43977,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.25
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -43965,7 +44013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860249266}
   m_LocalRotation: {x: -0.001979022, y: -0.22937927, z: -0.07072883, w: -0.97076195}
-  m_LocalPosition: {x: 102.1, y: 48.8, z: 77.2}
+  m_LocalPosition: {x: -60.1, y: -42.1, z: 185.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82844,18 +82892,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 493524827}
-  - {fileID: 646050807}
-  - {fileID: 1647273783}
-  - {fileID: 1632516127}
   - {fileID: 1313514379}
   - {fileID: 1715147220}
+  - {fileID: 646050807}
   - {fileID: 1766888670}
-  - {fileID: 1729442541}
+  - {fileID: 1647273783}
+  - {fileID: 1632516127}
   - {fileID: 1527751945}
   - {fileID: 1544818909}
   - {fileID: 1926430551}
   - {fileID: 1607517361}
   - {fileID: 287813585}
+  - {fileID: 1729442541}
   - {fileID: 530662003}
   - {fileID: 1961021737}
   - {fileID: 666529599}
@@ -94725,6 +94773,7 @@ GameObject:
   - component: {fileID: 1963034770}
   - component: {fileID: 1963034769}
   - component: {fileID: 1963034768}
+  - component: {fileID: 1963034771}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -94778,7 +94827,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -94796,6 +94845,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 3.062, y: 22.463001, z: 1.238}
+--- !u!114 &1963034771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963034767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1963034770}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 1
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1965504927
 GameObject:
   m_ObjectHideFlags: 0
@@ -95752,18 +95861,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 675631159}
-  - {fileID: 760778312}
-  - {fileID: 1742677457}
-  - {fileID: 238530480}
   - {fileID: 158028328}
   - {fileID: 1949834444}
-  - {fileID: 1672685727}
+  - {fileID: 1742677457}
+  - {fileID: 760778312}
   - {fileID: 127800364}
   - {fileID: 2056861813}
   - {fileID: 1809870564}
+  - {fileID: 238530480}
   - {fileID: 831183805}
   - {fileID: 1872342040}
   - {fileID: 1067354062}
+  - {fileID: 1672685727}
   - {fileID: 246946463}
   - {fileID: 385173687}
   - {fileID: 866131941}
