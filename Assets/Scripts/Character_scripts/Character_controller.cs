@@ -815,7 +815,12 @@ public class Character_controller : MonoBehaviour
     public void CloseDialogBubble()
     {
         bubbleText.GetComponent<TextMesh>().text = "";
+        bubbleText.GetComponent<TextMesh>().fontSize = 12;
         bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = false;
         bubbleText.GetComponent<MeshRenderer>().enabled = false;
+    }
+    public void ChangeDialogBubbleFontSize(int size)
+    {
+        bubbleText.GetComponent<TextMesh>().fontSize = size;
     }
 }

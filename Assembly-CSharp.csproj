@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Additional_Game_Save_Controller.cs" />
     <Compile Include="Assets\AdditionalGameContent\Content\Animations_to_AdditionalGame\Artist_AdditionalGame_controller.cs" />
     <Compile Include="Assets\AdditionalGameContent\Scripts\CardController.cs" />
     <Compile Include="Assets\AdditionalGameContent\Scripts\ExitScript.cs" />
@@ -139,6 +140,8 @@
     <Compile Include="Assets\Scripts\UI_scripts\StartScreen_OnHover.cs" />
     <Compile Include="Assets\Scripts\UI_scripts\StartScreen_OpeningAdditionalGame.cs" />
     <Compile Include="Assets\Touched_the_Hell.cs" />
+    <Compile Include="Assets\Tutorial_money.cs" />
+    <Compile Include="Assets\Tutorial_pasta.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

@@ -80,8 +80,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.0966105, y: 9.188364, z: 8.830082}
-  m_Center: {x: 0.055618282, y: 4.094182, z: 0.38371176}
+  m_Size: {x: 11.718406, y: 9.188364, z: 8.830082}
+  m_Center: {x: -0.21049498, y: 4.094182, z: 0.38371176}
 --- !u!114 &5360242281981326546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   customVelocity: {x: 0, y: 0}
   multiplier: 10
   bouncer: {fileID: 0}
+  tryHere: 0
 --- !u!54 &5360242281981326550
 Rigidbody:
   m_ObjectHideFlags: 0
