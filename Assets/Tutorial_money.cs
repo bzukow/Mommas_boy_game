@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Tutorial_money : MonoBehaviour
 {
+    Character_controller chc;
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))
         {
-            collider.GetComponent<Character_controller>().OpenDialogBubble("I can't spend money given\nfrom my mum...So gotta look\naround and see if someone\nlost their change...\nFinders keepers,\nlosers weepers");
-            collider.GetComponent<Character_controller>().ChangeDialogBubbleFontSize(10);
+            chc = collider.GetComponent<Character_controller>();
+            chc.OpenDialogBubble("I can't spend money given\nfrom my mum...So gotta look\naround and see if someone\nlost their change...\nFinders keepers,\nlosers weepers");
+            chc.ChangeDialogBubbleFontSize(10);
         }
     }
 
@@ -17,8 +19,19 @@ public class Tutorial_money : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            collider.GetComponent<Character_controller>().CloseDialogBubble();
-            Destroy(transform.GetComponent<BoxCollider>());
+            chc.CloseDialogBubble();
+            Destroy(gameObject);
+        }
+    }
+    public void DestroyMe()
+    {
+        if (chc)
+        {
+            chc.CloseDialogBubble();
+            Destroy(gameObject);
+        } else
+        {
+            Destroy(gameObject);
         }
     }
 }

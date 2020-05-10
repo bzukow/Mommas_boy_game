@@ -31,6 +31,7 @@ TagManager:
   - MyBool
   - PPV
   - ArtistButton
+  - Tutorial
   layers:
   - Default
   - TransparentFX

@@ -17,7 +17,12 @@ public class Tutorial_norm_alco : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             collider.GetComponent<Character_controller>().CloseDialogBubble();
-            Destroy(transform.GetComponent<BoxCollider>());
+            Destroy(gameObject);
         }
+    }
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 }

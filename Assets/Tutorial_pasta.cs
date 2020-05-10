@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Tutorial_pasta : MonoBehaviour
 {
+    Character_controller chc;
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))
         {
-            Character_controller chc = collider.GetComponent<Character_controller>();
+            chc = collider.GetComponent<Character_controller>();
             chc.bubbleText.GetComponent<TextMesh>().characterSize = 0.4f;
             chc.OpenDialogBubble("Oh well, I dont\nhave pasta on my\nlist... But you never\nknow when the\napocalipse will come");
         }
+        
     }
 
-    void OnTriggerExit(Collider collider)
+    public void DestroyMe()
     {
-        if (collider.CompareTag("Player"))
-        {
-            collider.GetComponent<Character_controller>().bubbleText.GetComponent<TextMesh>().characterSize = 0.5f;
-            collider.GetComponent<Character_controller>().CloseDialogBubble();
-            Destroy(transform.GetComponent<BoxCollider>());
-        }
+        chc = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
+        chc.bubbleText.GetComponent<TextMesh>().characterSize = 0.5f;
+        chc.CloseDialogBubble();
+        Destroy(gameObject);
+        
     }
 }

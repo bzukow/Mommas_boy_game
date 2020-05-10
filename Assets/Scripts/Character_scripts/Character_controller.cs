@@ -96,7 +96,7 @@ public class Character_controller : MonoBehaviour
             tri_poloski_shoes = 1;
 
            
-            transform.localPosition = new Vector3(0, 0, 11);
+            transform.localPosition = new Vector3(0, 0, 14);
             transform.localRotation = new Quaternion(0, 180, 0, 1);
 
             stunned = true;

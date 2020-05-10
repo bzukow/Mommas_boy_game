@@ -15,6 +15,7 @@ public class Save_Load_Controller : MonoBehaviour
     Teleporter_alcoholic_controller[] teleporters;
     Normal_alcoholic_controller[] alcoholics;
     GameObject[] thingsFromList;
+    GameObject[] tutorials;
 
     GameObject[] coins;
     public GameObject[] checks;
@@ -29,7 +30,7 @@ public class Save_Load_Controller : MonoBehaviour
         teleporters = FindObjectsOfType<Teleporter_alcoholic_controller>();
         alcoholics = FindObjectsOfType<Normal_alcoholic_controller>();
         thingsFromList = GameObject.FindGameObjectsWithTag("StuffFromList");
-
+        tutorials = GameObject.FindGameObjectsWithTag("Tutorial");
         coins = GameObject.FindGameObjectsWithTag("Coin");
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -123,6 +124,13 @@ public class Save_Load_Controller : MonoBehaviour
             data.coinsPositions[i, 1] = coins[i].transform.parent.position.y;
             data.coinsPositions[i, 2] = coins[i].transform.parent.position.z;
         }
+        data.tutorialsPositions = new float[tutorials.Length, 3];
+        for (int i = 0; i < tutorials.Length; i++)
+        {
+            data.tutorialsPositions[i, 0] = tutorials[i].transform.position.x;
+            data.tutorialsPositions[i, 1] = tutorials[i].transform.position.y;
+            data.tutorialsPositions[i, 2] = tutorials[i].transform.position.z;
+        }
 
         bf.Serialize(file, data);
         file.Close();
@@ -137,6 +145,7 @@ public class Save_Load_Controller : MonoBehaviour
         alcoholics = FindObjectsOfType<Normal_alcoholic_controller>();
         thingsFromList = GameObject.FindGameObjectsWithTag("StuffFromList");
         coins = GameObject.FindGameObjectsWithTag("Coin");
+        tutorials = GameObject.FindGameObjectsWithTag("Tutorial");
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/Data.dat", FileMode.Open);
@@ -144,7 +153,7 @@ public class Save_Load_Controller : MonoBehaviour
 
         file.Close();
 
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         for(int i = 0; i < checks.Length; i++)
         {
@@ -153,6 +162,30 @@ public class Save_Load_Controller : MonoBehaviour
                 checks[i].SetActive(true);
             }
         }
+        List<Vector3> tutorialsSavedPositions = new List<Vector3>();
+        for (int i = 0; i < data.tutorialsPositions.GetLength(0); i++)
+        {
+            tutorialsSavedPositions.Add(new Vector3(data.tutorialsPositions[i, 0], data.tutorialsPositions[i, 1], data.tutorialsPositions[i, 2]));
+        }
+
+        foreach (GameObject tutorial in tutorials)
+        {
+            if (!tutorialsSavedPositions.Contains(tutorial.transform.position))
+            {
+                if (tutorial.GetComponent<Tutorial_pasta>())
+                {
+                    tutorial.GetComponent<Tutorial_pasta>().DestroyMe();
+                } else if (tutorial.GetComponent<Tutorial_norm_alco>())
+                {
+                    tutorial.GetComponent<Tutorial_norm_alco>().DestroyMe();
+                } else
+                {
+                    tutorial.GetComponent<Tutorial_money>().DestroyMe();
+                }
+                
+            }
+        }
+
         List<Vector3> thingsSavedPositions = new List<Vector3>();
         for (int i = 0; i < data.thingsFromListPositions.GetLength(0); i++)
         {
@@ -166,7 +199,6 @@ public class Save_Load_Controller : MonoBehaviour
                 Destroy(thing.gameObject);
             }
         }
-        Invoke("LoadCheckpoint", 0.00000000001f);
 
         List<Vector3> grandmasSavedPositions = new List<Vector3>();
         for(int i = 0; i < data.grandmasPositions.GetLength(0); i++)
@@ -261,7 +293,8 @@ public class Save_Load_Controller : MonoBehaviour
         player.tri_poloski_sweatshirt = data.playerstripoloski_sweatshirt;
         player.tri_poloski_shoes = data.playerstripoloski_shoes;
 
-        
+        Invoke("LoadCheckpoint", 0.00000000001f);
+
         Invoke("LoadThis", 1f);
     }
     void LoadCheckpoint()
@@ -294,6 +327,7 @@ class PlayerData
     public float[,] alcoholicsPositions;
     public float[,] thingsFromListPositions;
     public float[,] coinsPositions;
+    public float[,] tutorialsPositions;
 
     public float[] checks;
 
