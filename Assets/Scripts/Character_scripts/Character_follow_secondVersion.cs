@@ -9,7 +9,7 @@ public class Character_follow_secondVersion : MonoBehaviour
 
     public float speed = 2.0f;
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         float interpolation = speed * Time.deltaTime;
 

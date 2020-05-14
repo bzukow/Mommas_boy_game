@@ -45,7 +45,7 @@ public class Touch_the_machete : MonoBehaviour
         }
         if(employee != null)
         {
-            if (collision.gameObject.CompareTag("Machete"))
+            /*if (collision.gameObject.CompareTag("Machete"))
             {
                 employee.GetComponent<Animator>().SetBool("CharacterHasBeenCaught", false);
                 employee.GetComponent<Animator>().SetBool("isTouched", true);
@@ -57,7 +57,7 @@ public class Touch_the_machete : MonoBehaviour
                 employee.GetComponent<Animator>().SetBool("CharacterHasBeenCaught", false);
                 employee.GetComponent<Animator>().SetBool("isTouched", true);
                 //cos ze cigareta nie zadziala
-            }
+            }*/
         }
     }
     public void TakePlayersLife()

@@ -50,11 +50,7 @@ public class Seller_controller : MonoBehaviour
     }
     IEnumerator ChickenSoupEnding()
     {
-        if (!File.Exists(Application.persistentDataPath + "/Won.dat"))
-        {
-            FileStream file = File.Create(Application.persistentDataPath + "/Won.dat");
-            file.Close();
-        }
+        
         float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene("ChickenSoupScene");

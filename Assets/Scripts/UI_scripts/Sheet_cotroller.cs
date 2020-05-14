@@ -30,7 +30,7 @@ public class Sheet_cotroller : MonoBehaviour
                 {
                     child.gameObject.SetActive(true);
                 }
-
+               
                 PauseGame();
                 isTabClicked = true;
                 ListButton.GetComponent<Button>().onClick.AddListener(delegate
@@ -44,21 +44,8 @@ public class Sheet_cotroller : MonoBehaviour
         }
         else if (isLoaded)
         {
-            
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(true);
-            }
-
-            PauseGame();
-            isTabClicked = true;
-            ListButton.GetComponent<Button>().onClick.AddListener(delegate
-            {
-                ButtonClicked();
-            });
-            ListButton.GetComponent<Button>().enabled = false;
             isLoaded = false;
-            readInput = true;
+            Invoke("SavedActivator", 1.5f);
         }
         if (readInput)
         {
@@ -68,13 +55,29 @@ public class Sheet_cotroller : MonoBehaviour
             }
         }
     }
+    private void SavedActivator()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
 
+        PauseGame();
+        isTabClicked = true;
+        ListButton.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            ButtonClicked();
+        });
+        ListButton.GetComponent<Button>().enabled = false;
+        isLoaded = false;
+        readInput = true;
+    }
     private void PauseGame()
     {
         if (!switchStart || isLoaded)
         {
             numbers.ActualiseSheet();
-            
+
         }
 
         Time.timeScale = 0;
@@ -85,6 +88,7 @@ public class Sheet_cotroller : MonoBehaviour
         LeftArrow.SetActive(true);
         RightArrow.SetActive(true);
         TabX.SetActive(true);
+
     }
     private void ContinueGame()
     {
@@ -119,6 +123,7 @@ public class Sheet_cotroller : MonoBehaviour
     {
         if (!isTabClicked && Time.timeScale == 1)
         {
+           
             foreach (Transform child in transform)
             {
                 child.GetComponent<RawImage>().enabled = true;

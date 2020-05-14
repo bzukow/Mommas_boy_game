@@ -69,7 +69,6 @@ public class Character_controller : MonoBehaviour
 
     public GameObject throwing_cigarette_line;
     // Start is called beforse the first frame update
-
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -79,6 +78,7 @@ public class Character_controller : MonoBehaviour
         if (File.Exists(Application.persistentDataPath + "/Data.dat"))
         {
             GameObject.FindGameObjectWithTag("Saver").GetComponent<Save_Load_Controller>().LoadGame();
+
         }
         else
         {
@@ -140,10 +140,12 @@ public class Character_controller : MonoBehaviour
     public KeyCode lastClickedKey;
     // Update is called once per frame
     public bool lift1tolift2;
-    
+    void FixedUpdate()
+    {
+        bubbleText.transform.parent.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z - 4);
+    }
     void Update()
     {
-        bubbleText.transform.parent.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z -4);
         if (started)
         {
             
@@ -306,6 +308,23 @@ public class Character_controller : MonoBehaviour
                 anim.SetBool("isCreepingDown", true);
                 canAttack = false;
                 speed = 2f;
+            }
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                print("halo");
+                ChickenSoupEnding();
+            }
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                HousekeeperEnding();
+            }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                UselessPastaEnding();
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                SelfishEnding();
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -822,5 +841,30 @@ public class Character_controller : MonoBehaviour
     public void ChangeDialogBubbleFontSize(int size)
     {
         bubbleText.GetComponent<TextMesh>().fontSize = size;
+    }
+    IEnumerator SelfishEnding()
+    {
+        float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene("SelfishScene");
+    }
+    IEnumerator ChickenSoupEnding()
+    {
+        print("HALO");
+        float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene("ChickenSoupScene");
+    }
+    IEnumerator HousekeeperEnding()
+    {
+        float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene("HousekeeperScene");
+    }
+    IEnumerator UselessPastaEnding()
+    {
+        float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene("UselessPastaScene");
     }
 }
