@@ -312,19 +312,19 @@ public class Character_controller : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 print("halo");
-                ChickenSoupEnding();
+                StartCoroutine(ChickenSoupEnding());
             }
             if (Input.GetKeyDown(KeyCode.H))
             {
-                HousekeeperEnding();
+                StartCoroutine(HousekeeperEnding());
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
-                UselessPastaEnding();
+                StartCoroutine(UselessPastaEnding());
             }
             if (Input.GetKeyDown(KeyCode.K))
             {
-                SelfishEnding();
+                StartCoroutine(SelfishEnding());
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -777,21 +777,30 @@ public class Character_controller : MonoBehaviour
         {
             tri_poloski_shoes, tri_poloski_sweatshirt, tri_poloski_trousers
         };
-        List<float> listOfThings = new List<float>()
+
+        GameObject checks = GameObject.FindGameObjectWithTag("Checks");
+        List<Transform> listOfChecks = new List<Transform>();
+
+        foreach(Transform child in checks.transform)
+        {
+            listOfChecks.Add(child);
+        }
+
+        if (listOfChecks.All(o => o.gameObject.activeSelf.Equals(true)))
+        {
+            thingPack = true;
+        }
+        /*List<float> listOfThings = new List<float>()
         {
             chilli, chicken, onions, limes, toilet_paper, coconut_milk, mushrooms, shrimps
-        };
+        };*/
+
 
         if (listOfTriPoloski.All(o => o.Equals(true)))
         {
-            print("weszlo anie powinno");
             tripoloskiPack = true;
         }
-        if (listOfThings.All(o => o.Equals(true)))
-        {
-            print("weszlo anie powinno");
-            thingPack = true;
-        }
+        
 
         if (tripoloskiPack && thingPack)
         {

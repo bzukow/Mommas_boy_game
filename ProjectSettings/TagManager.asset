@@ -32,6 +32,7 @@ TagManager:
   - PPV
   - ArtistButton
   - Tutorial
+  - Checks
   layers:
   - Default
   - TransparentFX
