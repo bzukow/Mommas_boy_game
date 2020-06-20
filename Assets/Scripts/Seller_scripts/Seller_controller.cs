@@ -7,8 +7,11 @@ public class Seller_controller : MonoBehaviour
 {
     string sentence;
     Animator anim;
+    AudioSource[] audiosources;
+
     void Start()
     {
+        audiosources = GetComponents<AudioSource>();
         anim = transform.parent.GetComponent<Animator>();
     }
     void OnTriggerEnter(Collider collider)
@@ -22,6 +25,7 @@ public class Seller_controller : MonoBehaviour
     }
     void ShowEnding()
     {
+        audiosources[0].Play();
         switch (sentence)
         {
             case "selfish":

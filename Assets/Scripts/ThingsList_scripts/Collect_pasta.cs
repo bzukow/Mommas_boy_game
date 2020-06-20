@@ -8,6 +8,7 @@ public class Collect_pasta : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
+            GetComponent<AudioSource>().Play();
             collider.GetComponent<Character_controller>().checkpoint = transform.parent.position;
             transform.parent.gameObject.tag = "Untagged";
             GameObject.FindGameObjectWithTag("Saver").GetComponent<Save_Load_Controller>().SaveGame();

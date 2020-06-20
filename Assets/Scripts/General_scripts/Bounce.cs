@@ -58,6 +58,7 @@ public class Bounce : MonoBehaviour
 
     void Jump()
     {
+        GetComponent<AudioSource>().Play();
         Character_controller chc = bouncer.GetComponent<Character_controller>();
         if (chc.inAir)
         {

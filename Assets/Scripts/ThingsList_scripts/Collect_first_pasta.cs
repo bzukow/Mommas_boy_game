@@ -9,7 +9,7 @@ public class Collect_first_pasta : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            print("wchodzi po zapisie");
+            GetComponent<AudioSource>().Play();
             collider.GetComponent<Character_controller>().checkpoint = transform.parent.position;
             tp.gameObject.tag = "Untagged";
             transform.parent.gameObject.tag = "Untagged";

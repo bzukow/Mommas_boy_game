@@ -19,8 +19,10 @@ public class Grandma_controller : MonoBehaviour
     bool enterOnce;
     public bool touchedTheTop;
     public BoxCollider hatArea_BoxCollider;
+    public AudioSource[] audiosources;
     void Start()
     {
+        audiosources = GetComponents<AudioSource>();
         canMove = true;
         anim = transform.GetComponent<Animator>();
         startPos = transform.position;
@@ -124,6 +126,8 @@ public class Grandma_controller : MonoBehaviour
     public ParticleSystem puffDying;
     public void WaitAndDelete()
     {
+        audiosources[0].Stop();
+        audiosources[1].Play();
         Invoke("TurnOffMesh", 0.3f);
         puffDying.transform.SetParent(null);
         puffDying.Play();
@@ -162,6 +166,6 @@ public class Grandma_controller : MonoBehaviour
 
     public void Onion_appeared()
     {
-        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,-1f,-1f), this.transform.rotation, null);
+        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,-1f,-1.5f), this.transform.rotation, null);
     }
 }

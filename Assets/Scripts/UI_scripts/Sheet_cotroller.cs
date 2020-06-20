@@ -20,6 +20,11 @@ public class Sheet_cotroller : MonoBehaviour
 
     public bool isLoaded;
     public bool readInput;
+    AudioSource[] audiosources;
+    void Start()
+    {
+        audiosources = GetComponents<AudioSource>();
+    }
     void Update()
     {
         if (switchStart)
@@ -74,6 +79,7 @@ public class Sheet_cotroller : MonoBehaviour
     }
     private void PauseGame()
     {
+        audiosources[0].Play();
         if (!switchStart || isLoaded)
         {
             numbers.ActualiseSheet();
@@ -92,6 +98,7 @@ public class Sheet_cotroller : MonoBehaviour
     }
     private void ContinueGame()
     {
+        audiosources[1].Play();
         Time.timeScale = 1;
 
         foreach (Transform child in transform)
@@ -105,6 +112,7 @@ public class Sheet_cotroller : MonoBehaviour
 
     public void ButtonClicked()
     {
+        audiosources[0].Play();
         foreach (Transform child in transform)
         {
             child.GetComponent<RawImage>().enabled = true;
@@ -121,9 +129,10 @@ public class Sheet_cotroller : MonoBehaviour
 
     public void ExitWithAButton()
     {
+        
         if (!isTabClicked && Time.timeScale == 1)
         {
-           
+            audiosources[0].Play();
             foreach (Transform child in transform)
             {
                 child.GetComponent<RawImage>().enabled = true;
@@ -138,6 +147,7 @@ public class Sheet_cotroller : MonoBehaviour
         }
         else if (isTabClicked && Time.timeScale == 0)
         {
+            audiosources[1].Play();
             foreach (Transform child in transform)
             {
                 child.GetComponent<RawImage>().enabled = false;

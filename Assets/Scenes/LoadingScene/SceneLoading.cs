@@ -7,13 +7,11 @@ public class SceneLoading : MonoBehaviour
 {
     
     public Image _progressBar;
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(LoadAsyncLevel());
     }
 
-    // Update is called once per frame
     IEnumerator LoadAsyncLevel()
     {
         AsyncOperation gameLevel = SceneManager.LoadSceneAsync("Level");

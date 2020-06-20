@@ -8,6 +8,7 @@ public class LiftOpening : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
+            GetComponent<AudioSource>().Play();
             transform.GetComponent<Animator>().SetBool("Opening", true);
         }
     }
@@ -15,6 +16,7 @@ public class LiftOpening : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
+            GetComponent<AudioSource>().Play();
             transform.GetComponent<Animator>().SetBool("Opening", false);
         }
     }

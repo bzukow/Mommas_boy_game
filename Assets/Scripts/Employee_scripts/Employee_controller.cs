@@ -17,10 +17,12 @@ public class Employee_controller : MonoBehaviour
     public Transform[] particleSystems;
     public bool hasStopper;
     public bool stopCollider;
+    AudioSource[] audiosources;
     //public bool canTakeLives;
     // Start is called before the first frame update
     void Start()
     {
+        audiosources = GetComponents<AudioSource>();
         foreach (Transform particleSystem in particleSystems)
         {
             particleSystem.GetComponent<ParticleSystem>().Stop();
@@ -107,6 +109,7 @@ public class Employee_controller : MonoBehaviour
     }
     public void ReleasePlayer()
     {
+        audiosources[0].Stop();
         foreach (Transform particleSystem in particleSystems)
         {
             particleSystem.GetComponent<ParticleSystem>().Stop();
@@ -133,6 +136,7 @@ public class Employee_controller : MonoBehaviour
     }
     public void CatchPlayer()
     {
+        audiosources[0].Play();
         foreach (Transform particleSystem in particleSystems)
         {
             particleSystem.GetComponent<ParticleSystem>().Play();
@@ -179,6 +183,7 @@ public class Employee_controller : MonoBehaviour
     public ParticleSystem puffDying;
     public void WaitAndDelete()
     {
+        
         puffDying.transform.SetParent(null);
         puffDying.Play();
     }
@@ -192,5 +197,10 @@ public class Employee_controller : MonoBehaviour
             mushrooms.SetActive(true);
         }
         gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+    }
+    public void SoundDeath()
+    {
+        audiosources[0].Stop();
+        audiosources[1].Play();
     }
 }

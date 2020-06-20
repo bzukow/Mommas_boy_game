@@ -68,12 +68,13 @@ public class Character_controller : MonoBehaviour
     public NumbersSheet numbers;
 
     public GameObject throwing_cigarette_line;
+    public AudioSource[] audiosources;
     // Start is called beforse the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
         anim = this.GetComponent<Animator>();
-        
+        audiosources = this.GetComponents<AudioSource>();
 
         if (File.Exists(Application.persistentDataPath + "/Data.dat"))
         {
@@ -95,7 +96,7 @@ public class Character_controller : MonoBehaviour
             tri_poloski_trousers = 1;
             tri_poloski_shoes = 1;
 
-           
+
             transform.localPosition = new Vector3(0, 0, 14);
             transform.localRotation = new Quaternion(0, 180, 0, 1);
 
@@ -116,7 +117,7 @@ public class Character_controller : MonoBehaviour
         eaten = false;
         escaped = true;
         facingLeft = false;
-       
+
         throwing_machine = GameObject.FindGameObjectWithTag("Throwing_machine");
         throwingTime = 1;
 
@@ -126,12 +127,12 @@ public class Character_controller : MonoBehaviour
     }
     void LivesUpdatedAfterLoading()
     {
-        for(int i = displayedLives.Count; i > 0; i--)
+        for (int i = displayedLives.Count; i > 0; i--)
         {
-            if(i > lives)
+            if (i > lives)
             {
 
-                Destroy(displayedLives[i-1].gameObject);
+                Destroy(displayedLives[i - 1].gameObject);
                 displayedLives.RemoveAt(i - 1);
             }
         }
@@ -148,10 +149,10 @@ public class Character_controller : MonoBehaviour
     {
         if (started)
         {
-            
+
             stunned = true;
             canAttack = false;
-            
+
             if (lift1)
             {
                 float step = speed * Time.deltaTime;
@@ -267,7 +268,7 @@ public class Character_controller : MonoBehaviour
                     }
                     anim.SetBool("isCigaretteThrown", true);
                     stunned = true;
-                    
+
                     if (throwingTime < 3.9f)
                     {
                         throwing_cigarette_line.SetActive(true);
@@ -279,7 +280,7 @@ public class Character_controller : MonoBehaviour
                         lastClickedKey = KeyCode.RightAlt;
                         isThrowing = true;
                     }
-                   
+
                 }
             }
 
@@ -303,7 +304,7 @@ public class Character_controller : MonoBehaviour
                 lastClickedKey = KeyCode.LeftAlt;
                 Invoke("releasedCigaretteFalse", 0.5f);
             }
-            if (Input.GetKey(KeyCode.RightControl) && !stunned)
+            if (Input.GetKey(KeyCode.RightControl) && !stunned && !anim.GetBool("isInSmoke"))
             {
                 anim.SetBool("isCreepingDown", true);
                 canAttack = false;
@@ -353,7 +354,7 @@ public class Character_controller : MonoBehaviour
                 Invoke("InvokeDefeated", 2f);
             }
 
-            if (lives > 0  && anim.GetBool("isParalised"))
+            if (lives > 0 && anim.GetBool("isParalised"))
             {
                 lives -= 1 * Time.deltaTime;
             }
@@ -396,11 +397,21 @@ public class Character_controller : MonoBehaviour
                 vel.y -= 20 * Time.deltaTime;
                 rb.velocity = vel;
             }
+            if (anim.GetFloat("speed") > 0 && anim.GetBool("isGrounded"))
+            {
+                if (!audiosources[0].isPlaying)
+                {
+                    audiosources[0].Play();
+                }
+            } else
+            {
+                audiosources[0].Stop();
+            }
         }
     }
     void FirstCigarette()
     {
-        if (cigarettes==9)
+        if (cigarettes == 9)
         {
             OpenDialogBubble("I will for sure\nneed one after\nthis trip...");
             Invoke("CloseDialogBubble", 4f);
@@ -418,7 +429,7 @@ public class Character_controller : MonoBehaviour
         while (duration > 0f)
         {
             duration -= Time.deltaTime;
-            if (displayedLives.Count >=1 && canTakeLives)
+            if (displayedLives.Count >= 1 && canTakeLives)
             {
                 Destroy(displayedLives[displayedLives.Count - 1]);
                 displayedLives.RemoveAt(displayedLives.Count - 1);
@@ -430,7 +441,7 @@ public class Character_controller : MonoBehaviour
     public Rigidbody rb;
     public void WaitForAnotherCaught()
     {
-        
+
         lastCollided = null;
 
     }
@@ -494,7 +505,7 @@ public class Character_controller : MonoBehaviour
         }
         if ((collision.transform.CompareTag("Monster") || collision.transform.CompareTag("Grandma")) && !immortal)
         {
-            if (collision.transform.CompareTag("Grandma")){
+            if (collision.transform.CompareTag("Grandma")) {
                 Grandma_controller gc = collision.transform.GetComponent<Grandma_controller>();
                 if (gc.touchedTheTop)
                 {
@@ -513,7 +524,7 @@ public class Character_controller : MonoBehaviour
     BoxCollider grandma_top_collider;
     void GrandmaCanTouchAgain()
     {
-        
+
         grandma_top_collider.enabled = true;
         grandma_top_collider.transform.GetComponent<Grandma_controller>().touchedTheTop = false;
         grandma_top_collider = null;
@@ -555,7 +566,7 @@ public class Character_controller : MonoBehaviour
         {
             if (collider.CompareTag("Coin"))
             {
-                //audios[0].Play();
+                audiosources[3].Play();
                 coins++;
                 UpdateCoinAmount();
                 Destroy(collider.gameObject);
@@ -575,6 +586,7 @@ public class Character_controller : MonoBehaviour
     public float savedThrowingTime;
     void ThrowCigarette()
     {
+        audiosources[2].Play();
         throwing_cigarette_line.SetActive(false);
         anim.SetBool("isCigaretteThrown", false);
         canAttack = false;
@@ -583,7 +595,7 @@ public class Character_controller : MonoBehaviour
         cigaretteAmount.text = "x " + cigarettes.ToString();
         var szlg = Instantiate(cigarette, throwing_machine.transform.position, throwing_machine.transform.rotation, null);
         szlg.transform.parent = throwing_machine.transform;
-        
+
         szlg.ThrowCigarette(savedThrowingTime);
     }
 
@@ -652,7 +664,7 @@ public class Character_controller : MonoBehaviour
         anim.SetBool("isCigaretteThrown", false);
         lives--;
         Destroy(displayedLives[displayedLives.Count - 1]);
-        displayedLives.RemoveAt(displayedLives.Count-1);
+        displayedLives.RemoveAt(displayedLives.Count - 1);
         if (lives <= 0)
         {
             stunned = true;
@@ -740,7 +752,7 @@ public class Character_controller : MonoBehaviour
             canAttack = true;
             yield break;
         }
-        
+
     }
 
     void Eaten()
@@ -781,7 +793,7 @@ public class Character_controller : MonoBehaviour
         GameObject checks = GameObject.FindGameObjectWithTag("Checks");
         List<Transform> listOfChecks = new List<Transform>();
 
-        foreach(Transform child in checks.transform)
+        foreach (Transform child in checks.transform)
         {
             listOfChecks.Add(child);
         }
@@ -800,7 +812,7 @@ public class Character_controller : MonoBehaviour
         {
             tripoloskiPack = true;
         }
-        
+
 
         if (tripoloskiPack && thingPack)
         {
@@ -808,9 +820,9 @@ public class Character_controller : MonoBehaviour
         } else if (tripoloskiPack && !thingPack)
         {
             return "selfish";
-        }else if (!tripoloskiPack && thingPack)
-        { 
-            return "im_not_your_housekeeper"; 
+        } else if (!tripoloskiPack && thingPack)
+        {
+            return "im_not_your_housekeeper";
         } else
         {
             return "useless_pasta";
@@ -875,5 +887,10 @@ public class Character_controller : MonoBehaviour
         float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene("UselessPastaScene");
+    }
+
+    public void SoundMachete()
+    {
+        audiosources[1].Play();
     }
 }
