@@ -55,13 +55,11 @@ public class Weapon_switcher : MonoBehaviour
                     selectedWeaponObject = weaponList[selectedWeapon];
                 }
             }
-
             if (previousSelectedWeapon != selectedWeapon)
             {
                 SelectWeapon();
             }
         }
-        
     }
 
     void ChangeAnimation()

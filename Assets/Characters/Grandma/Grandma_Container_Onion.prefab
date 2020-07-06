@@ -717,6 +717,7 @@ MonoBehaviour:
   canTakeGrandmaLive: 0
   touchedTheTop: 0
   hatArea_BoxCollider: {fileID: 0}
+  audiosources: []
   isStunned: 0
   puffDying: {fileID: 6874738014018902767}
   onionPrefab: {fileID: 0}
@@ -730,18 +731,18 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2104fe8f41030e34789b5bb319d9f1ae, type: 3}
+  m_audioClip: {fileID: 8300000, guid: deeda9f036552694eba24430654cec6b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 41
+  Priority: 134
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 19.019867
+  MaxDistance: 14.48558
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

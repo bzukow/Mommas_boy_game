@@ -25,8 +25,8 @@ public class Collect_tri_poloski_sweater : MonoBehaviour
     void Collect()
     {
         player.tri_poloski_sweatshirt--;
-        Destroy(transform.parent.gameObject);
-        //zagraj animacje jakas plz 
+        GameObject.FindGameObjectWithTag("Music_save").GetComponent<AudioSource>().Play();
+        Destroy(transform.parent.gameObject); 
         player.canCollect = true;
     }
 }

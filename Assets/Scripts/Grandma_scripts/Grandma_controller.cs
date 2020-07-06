@@ -29,6 +29,7 @@ public class Grandma_controller : MonoBehaviour
         moveUp = true;
         canTakeGrandmaLive = true;
         enterOnce = true;
+        audiosources[0].Play();
     }
     void Update()
     {
@@ -166,6 +167,6 @@ public class Grandma_controller : MonoBehaviour
 
     public void Onion_appeared()
     {
-        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,-1f,-1.5f), this.transform.rotation, null);
+        var clone = Instantiate(onionPrefab, hatCannon.position-new Vector3(0,-1f,-0.2f), this.transform.rotation, null);
     }
 }

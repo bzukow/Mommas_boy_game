@@ -15,12 +15,14 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
     public float alreadyUsed;
     public float amountToTake;
     public bool isTroll;
-
+    AudioSource[] audiosources;
     void Start()
     {
+        audiosources = GetComponents<AudioSource>();
         textInside = bubbleText.GetComponent<TextMesh>().text;
         firstTime = 1;
         alreadyUsed = 0;
+        audiosources[0].Play();
     }
     void OnTriggerStay(Collider collider)
     {
@@ -117,8 +119,11 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
     }
     void Teleport()
     {
+        audiosources[0].Stop();
+        audiosources[1].Play();
         GameObject.FindGameObjectWithTag("Player").transform.position = target.position;
         GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().stunned = false;
         alreadyUsed = 1;
+        audiosources[0].Play();
     }
 }

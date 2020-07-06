@@ -6,7 +6,7 @@ public class Collect_shrimp : MonoBehaviour
 {
     public GameObject check;
     public Character_controller player;
-    //trzeba w moomencie zapisu ogarnac
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>();
@@ -30,8 +30,8 @@ public class Collect_shrimp : MonoBehaviour
         {
             check.SetActive(true);
         }
+        GameObject.FindGameObjectWithTag("Music_save").GetComponent<AudioSource>().Play();
         Destroy(transform.parent.gameObject);
-        //zagraj animacje jakas plz 
         player.canCollect = true;
     }
 }

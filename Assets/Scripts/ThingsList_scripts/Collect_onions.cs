@@ -23,8 +23,8 @@ public class Collect_onions : MonoBehaviour
     void Collect()
     {
         player.onions--;
+        GameObject.FindGameObjectWithTag("Music_save").GetComponent<AudioSource>().Play();
         Destroy(transform.parent.gameObject);
-        //zagraj animacje jakas plz 
         player.canCollect = true;
     }
     void TurnOnBoxCollider()

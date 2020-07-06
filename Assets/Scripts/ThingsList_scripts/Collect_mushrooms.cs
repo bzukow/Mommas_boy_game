@@ -29,8 +29,8 @@ public class Collect_mushrooms : MonoBehaviour
         {
             check.SetActive(true);
         }
+        GameObject.FindGameObjectWithTag("Music_save").GetComponent<AudioSource>().Play();
         Destroy(transform.parent.gameObject);
-        //zagraj animacje jakas plz 
         player.canCollect = true;
     }
 }

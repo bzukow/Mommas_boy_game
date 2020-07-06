@@ -25,8 +25,8 @@ public class Collect_tri_poloski_shoes : MonoBehaviour
     void Collect()
     {
         player.tri_poloski_shoes--;
+        GameObject.FindGameObjectWithTag("Music_save").GetComponent<AudioSource>().Play();
         Destroy(transform.parent.gameObject);
-        //zagraj animacje jakas plz 
         player.canCollect = true;
     }
 }

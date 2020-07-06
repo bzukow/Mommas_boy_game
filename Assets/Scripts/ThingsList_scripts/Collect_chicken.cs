@@ -30,9 +30,8 @@ public class Collect_chicken : MonoBehaviour
         {
             check.SetActive(true);
         }
+        GameObject.FindGameObjectWithTag("Music_save").GetComponent<AudioSource>().Play();
         player.canCollect = true;
         Destroy(transform.parent.gameObject);
-        //zagraj animacje jakas plz 
-
     }
 }

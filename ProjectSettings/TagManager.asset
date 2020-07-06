@@ -33,6 +33,7 @@ TagManager:
   - ArtistButton
   - Tutorial
   - Checks
+  - Music_save
   layers:
   - Default
   - TransparentFX

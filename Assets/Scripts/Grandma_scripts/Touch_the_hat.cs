@@ -36,7 +36,6 @@ public class Touch_the_hat : MonoBehaviour
                 }
                 if (GameObject.FindGameObjectWithTag("Beret"))
                 {
-                    print("badz tu");
                     GameObject.FindGameObjectWithTag("Beret").GetComponent<Deadly_hat>().moveUp = false;
                 }
             }

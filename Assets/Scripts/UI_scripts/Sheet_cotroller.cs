@@ -50,7 +50,8 @@ public class Sheet_cotroller : MonoBehaviour
         else if (isLoaded)
         {
             isLoaded = false;
-            Invoke("SavedActivator", 1.5f);
+                Invoke("SavedActivator", 1.5f);
+           
         }
         if (readInput)
         {
@@ -62,20 +63,24 @@ public class Sheet_cotroller : MonoBehaviour
     }
     private void SavedActivator()
     {
-        foreach (Transform child in transform)
+        if (!GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().lift1)
         {
-            child.gameObject.SetActive(true);
-        }
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
 
-        PauseGame();
-        isTabClicked = true;
-        ListButton.GetComponent<Button>().onClick.AddListener(delegate
-        {
-            ButtonClicked();
-        });
-        ListButton.GetComponent<Button>().enabled = false;
-        isLoaded = false;
-        readInput = true;
+            PauseGame();
+            isTabClicked = true;
+            ListButton.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                ButtonClicked();
+            });
+            ListButton.GetComponent<Button>().enabled = false;
+            isLoaded = false;
+            readInput = true;
+        }
+        
     }
     private void PauseGame()
     {

@@ -8,12 +8,14 @@ public class Normal_alcoholic_controller : MonoBehaviour
     GameObject cigaretteCatched;
     public Transform[] particleSystems;
     public Transform fog;
-    
+    AudioSource[] audiosources;
 
     // Start is called before the first frame update
     void Start()
     {
+        audiosources = GetComponents<AudioSource>();
         anim = transform.GetComponent<Animator>();
+        audiosources[0].Play();
     }
 
     // Update is called once per frame
@@ -41,6 +43,7 @@ public class Normal_alcoholic_controller : MonoBehaviour
     {
         if (collider.CompareTag("Cigarette"))
         {
+            audiosources[0].Stop();
             foreach (Transform particleSystem in particleSystems)
             {
                 particleSystem.GetComponent<ParticleSystem>().Stop();
@@ -77,5 +80,18 @@ public class Normal_alcoholic_controller : MonoBehaviour
         {
             fog.GetComponent<Alco_fog_controller>().graphicContainer.gameObject.SetActive(false);
         }
+    }
+    public void SoundCigaretteCaught()
+    {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().normalAlcoSound)
+        {
+            audiosources[1].Play();
+        }
+        Invoke("SoundTurnOn", 2f);
+    }
+    public void SoundTurnOn()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().normalAlcoSound = true;
+
     }
 }

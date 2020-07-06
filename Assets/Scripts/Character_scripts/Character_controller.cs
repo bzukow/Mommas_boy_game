@@ -69,6 +69,7 @@ public class Character_controller : MonoBehaviour
 
     public GameObject throwing_cigarette_line;
     public AudioSource[] audiosources;
+    public bool normalAlcoSound;
     // Start is called beforse the first frame update
     void Start()
     {
@@ -79,7 +80,7 @@ public class Character_controller : MonoBehaviour
         if (File.Exists(Application.persistentDataPath + "/Data.dat"))
         {
             GameObject.FindGameObjectWithTag("Saver").GetComponent<Save_Load_Controller>().LoadGame();
-
+            normalAlcoSound = false;
         }
         else
         {
@@ -306,6 +307,10 @@ public class Character_controller : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.RightControl) && !stunned && !anim.GetBool("isInSmoke"))
             {
+                if (!anim.GetBool("isCreepingDown"))
+                {
+                    audiosources[4].Play();
+                }
                 anim.SetBool("isCreepingDown", true);
                 canAttack = false;
                 speed = 2f;
@@ -397,7 +402,7 @@ public class Character_controller : MonoBehaviour
                 vel.y -= 20 * Time.deltaTime;
                 rb.velocity = vel;
             }
-            if (anim.GetFloat("speed") > 0 && anim.GetBool("isGrounded"))
+            if (anim.GetFloat("speed") > 0 && anim.GetBool("isGrounded") && !anim.GetBool("isCreepingDown") && !anim.GetBool("isInSmoke") && !lift1)
             {
                 if (!audiosources[0].isPlaying)
                 {
@@ -797,23 +802,14 @@ public class Character_controller : MonoBehaviour
         {
             listOfChecks.Add(child);
         }
-
         if (listOfChecks.All(o => o.gameObject.activeSelf.Equals(true)))
         {
             thingPack = true;
         }
-        /*List<float> listOfThings = new List<float>()
-        {
-            chilli, chicken, onions, limes, toilet_paper, coconut_milk, mushrooms, shrimps
-        };*/
-
-
         if (listOfTriPoloski.All(o => o.Equals(true)))
         {
             tripoloskiPack = true;
         }
-
-
         if (tripoloskiPack && thingPack)
         {
             return "chicken_soup_is_better";
@@ -871,7 +867,6 @@ public class Character_controller : MonoBehaviour
     }
     IEnumerator ChickenSoupEnding()
     {
-        print("HALO");
         float fadeTime = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene("ChickenSoupScene");
@@ -893,4 +888,6 @@ public class Character_controller : MonoBehaviour
     {
         audiosources[1].Play();
     }
+
+   
 }
