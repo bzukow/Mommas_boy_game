@@ -70,7 +70,7 @@ public class Character_controller : MonoBehaviour
     public GameObject throwing_cigarette_line;
     public AudioSource[] audiosources;
     public bool normalAlcoSound;
-    // Start is called beforse the first frame update
+    
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -140,7 +140,7 @@ public class Character_controller : MonoBehaviour
     }
     public bool isThrowing;
     public KeyCode lastClickedKey;
-    // Update is called once per frame
+   
     public bool lift1tolift2;
     void FixedUpdate()
     {
@@ -168,20 +168,7 @@ public class Character_controller : MonoBehaviour
                     lift1 = false;
                 }
             }
-            else if (lift2)
-            {
-                /*float step = speed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, targetToLift2.position.z - 5f), step);
-
-                if (transform.position == new Vector3(transform.position.x, transform.position.y, -3.54f))
-                {
-                    anim.SetBool("enter_the_lift", false);
-                    transform.Rotate(0, -90, 0);
-                    started = false;
-                    stunned = false;
-                    canAttack = true;
-                }*/
-            }
+            else if (lift2){}
             else if (started1)
             {
                 float step = speed * Time.deltaTime;
@@ -315,9 +302,15 @@ public class Character_controller : MonoBehaviour
                 canAttack = false;
                 speed = 2f;
             }
+            else if (Input.GetKeyUp(KeyCode.RightControl))
+            {
+                canAttack = true;
+                speed = 7f;
+                anim.SetBool("isCreepingDown", false);
+            }
+
             if (Input.GetKeyDown(KeyCode.G))
             {
-                print("halo");
                 StartCoroutine(ChickenSoupEnding());
             }
             if (Input.GetKeyDown(KeyCode.H))
@@ -335,12 +328,6 @@ public class Character_controller : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.P))
             {
                 transform.position = target.position;
-            }
-            else if (Input.GetKeyUp(KeyCode.RightControl))
-            {
-                canAttack = true;
-                speed = 7f;
-                anim.SetBool("isCreepingDown", false);
             }
 
             if (lives < 1 || displayedLives.Count == 0)
@@ -648,10 +635,7 @@ public class Character_controller : MonoBehaviour
 
     public void FinishIsHitted()
     {
-        //TU??? ZE WSTAJE I ZA SZYBKO IDZIE
-
         anim.SetBool("isHitted", false);
-        //Invoke("NotImmortal", 2f);
     }
 
     public void FinishTheGame()

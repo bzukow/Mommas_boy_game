@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: -1336}
+  m_AnchoredPosition: {x: 0.000030517578, y: -1100}
   m_SizeDelta: {x: 766.7, y: 322.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &59576118
@@ -225,7 +225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: -1461.0001}
+  m_AnchoredPosition: {x: 0.000030517578, y: -1225.0001}
   m_SizeDelta: {x: 1189.8, y: 605.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &299413684
@@ -304,7 +304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2077}
+  m_AnchoredPosition: {x: 0, y: -1841}
   m_SizeDelta: {x: 766.7, y: 322.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920294431
@@ -383,7 +383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1640.0001}
+  m_AnchoredPosition: {x: 0, y: -1404.0001}
   m_SizeDelta: {x: 766.7, y: 322.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &995836302
@@ -531,7 +531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 473, y: -1056.1}
+  m_AnchoredPosition: {x: 473, y: -971.1}
   m_SizeDelta: {x: 780.4, y: 456.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1315591296
@@ -567,8 +567,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Miko\u0142aj Beli\u0144ski\nMiko\u0142aj Beli\u0144ski\nBarbara \u017Bukowska\nBarbara
-    \u017Bukowska\nMiko\u0142aj Beli\u0144ski"
+  m_Text: "Miko\u0142aj Beli\u0144ski\nMiko\u0142aj Beli\u0144ski\nMiko\u0142aj Beli\u0144ski"
 --- !u!222 &1315591297
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -611,7 +610,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -742}
+  m_AnchoredPosition: {x: 0, y: -657}
   m_SizeDelta: {x: 766.7, y: 322.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1451577330
@@ -690,7 +689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1820}
+  m_AnchoredPosition: {x: 0, y: -1584}
   m_SizeDelta: {x: 1189.8, y: 605.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1460901896
@@ -991,7 +990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -412.4, y: -1056.1}
+  m_AnchoredPosition: {x: -412.4, y: -971.1}
   m_SizeDelta: {x: 648.2, y: 456.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1817657549
@@ -1030,10 +1029,6 @@ MonoBehaviour:
   m_Text: 'Main character
 
     Normal alcoholic
-
-    Employee
-
-    Seller
 
     Teleporter
 

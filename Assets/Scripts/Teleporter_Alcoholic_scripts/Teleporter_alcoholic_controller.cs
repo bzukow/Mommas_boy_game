@@ -15,6 +15,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
     public float alreadyUsed;
     public float amountToTake;
     public bool isTroll;
+    public bool isGoodGuy;
     AudioSource[] audiosources;
     void Start()
     {
@@ -40,7 +41,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
                 else
                 {
                     float amountCoins = GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins;
-                    if (amountCoins >= amountToTake && firstTime == 1 && !eaten)
+                    if (amountCoins >= amountToTake && (firstTime == 1 || isGoodGuy) && !eaten)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins -= amountToTake;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().UpdateCoinAmount();
@@ -52,7 +53,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
                         Invoke("Teleport", 2f);
                         Invoke("Eaten", 1);
                     }
-                    else if (firstTime == 0 && amountCoins >= amountToTake + 1f && !eaten)
+                    else if (firstTime == 0 && amountCoins >= amountToTake + 1f && !eaten && !isGoodGuy)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().coins -= amountToTake +1f;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<Character_controller>().UpdateCoinAmount();
@@ -89,7 +90,7 @@ public class Teleporter_alcoholic_controller : MonoBehaviour
             graphicContainer.gameObject.SetActive(true);
             bubbleText.transform.parent.GetComponent<SpriteRenderer>().enabled = true;
             bubbleText.GetComponent<MeshRenderer>().enabled = true;
-            if (firstTime == 0)
+            if (firstTime == 0 && !isGoodGuy)
             {
                 bubbleText.GetComponent<TextMesh>().text = "You again? You should\nbe faster, you should\n know it won't be cheaper";
             }
