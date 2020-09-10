@@ -193,7 +193,7 @@ public class Employee_controller : MonoBehaviour
         if (mushrooms != null)
         {
             mushrooms.transform.SetParent(null);
-            mushrooms.transform.position = new Vector3(mushrooms.transform.position.x-2f, mushrooms.transform.position.y+1f, mushrooms.transform.position.z+2.5f);
+            mushrooms.transform.position = new Vector3(mushrooms.transform.position.x-2f, mushrooms.transform.position.y+1f, mushrooms.transform.position.z+1f);
             mushrooms.SetActive(true);
         }
         gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;

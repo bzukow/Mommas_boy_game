@@ -768,7 +768,7 @@ public class Character_controller : MonoBehaviour
         anim.SetBool("releasedCigarette", false);
         throwingTime = 1;
     }
-
+    public GameObject checks;
     public string CheckIfEverythingIsCollected()
     {
         bool tripoloskiPack = false;
@@ -778,8 +778,7 @@ public class Character_controller : MonoBehaviour
         {
             tri_poloski_shoes, tri_poloski_sweatshirt, tri_poloski_trousers
         };
-
-        GameObject checks = GameObject.FindGameObjectWithTag("Checks");
+ 
         List<Transform> listOfChecks = new List<Transform>();
 
         foreach (Transform child in checks.transform)
@@ -790,7 +789,7 @@ public class Character_controller : MonoBehaviour
         {
             thingPack = true;
         }
-        if (listOfTriPoloski.All(o => o.Equals(true)))
+        if (listOfTriPoloski.All(o => o.Equals(0)))
         {
             tripoloskiPack = true;
         }
